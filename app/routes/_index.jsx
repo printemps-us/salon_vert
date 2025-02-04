@@ -190,7 +190,7 @@ export default function Homepage() {
           </a>
           <p className="moderat-bold sign-up-text" style={{color: '#e8d09b'}}>
             Maison Passerelle is part of Printemps new york, For more
-            information sign up for our newsletter
+            information sign up for our newsletter test
           </p>
         </div>
         <form onSubmit={handleSubmit} style={{width: '100%'}}>
