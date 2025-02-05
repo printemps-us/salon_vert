@@ -156,7 +156,7 @@ export default function Homepage() {
   return (
     <div className="background">
       <div className="main-area">
-        <div className='w-[450px]'>
+        <div className="w-[450px]">
           <Logo></Logo>
         </div>
         <p
