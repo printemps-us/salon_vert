@@ -1,4 +1,4 @@
-import {useNonce, getShopAnalytics, Analytics} from '@shopify/hydrogen';
+import {useNonce, getShopAnalytics, Analytics, Script} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
 import {
   Links,
@@ -157,7 +157,10 @@ export function Layout({children}) {
         <link rel="stylesheet" href={tailwindCss}></link>
         <link rel="stylesheet" href={resetStyles}></link>
         <link rel="stylesheet" href={appStyles}></link>
-        <link rel="stylesheet" href="https://use.typekit.net/eiq4ccg.css"></link>
+        <link
+          rel="stylesheet"
+          href="https://use.typekit.net/eiq4ccg.css"
+        ></link>
         <Meta />
         <Links />
       </head>
@@ -174,6 +177,10 @@ export function Layout({children}) {
           children
         )}
         <ScrollRestoration nonce={nonce} />
+        <Script
+          src="https://widgets.resy.com/embed.js"
+          referrerPolicy="no-referrer"
+        />
         <Scripts nonce={nonce} />
       </body>
     </html>

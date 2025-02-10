@@ -3,6 +3,9 @@ import {Await, useLoaderData, Link} from '@remix-run/react';
 import {Suspense, useState} from 'react';
 import {Image, Money} from '@shopify/hydrogen';
 import Logo from '~/components/Logo';
+import IG from '~/assets/SalonVertIG.png';
+import RestaurantModal from '~/components/RestaurantModal';
+import AnimatedButton from '~/components/AnimatedButton';
 /**
  * @type {MetaFunction}
  */
@@ -61,6 +64,7 @@ function loadDeferredData({context}) {
 
 export default function Homepage() {
   const [form, setForm] = useState({email: ''});
+  const [modalOpen, setModalOpen] = useState(false);
   const [state, setState] = useState({
     isWaiting: false,
     isSubmitted: false,
@@ -155,6 +159,13 @@ export default function Homepage() {
   const data = useLoaderData();
   return (
     <div className="background">
+      <RestaurantModal
+        setOpenModal={setModalOpen}
+        openModal={modalOpen}
+        venue_id={'87092'}
+        link={'https://resy.com/cities/new-york-ny/venues/salon-vert'}
+        api_key={'z4Ih9aYxtWx3obA8GxX8Rsa33g5mQzKZ'}
+      ></RestaurantModal>
       <div className="main-area">
         <div className="w-[450px]">
           <Logo></Logo>
@@ -169,6 +180,27 @@ export default function Homepage() {
           One Wall street, NY
         </p> */}
       </div>
+      <div className="h-auto w-full flex max-[835px]:flex-col gap-3 justify-center items-center mb-[100px] mt-[-100px]">
+        <AnimatedButton
+          text={'Book with Resy'}
+          bgColor={'black'}
+          hoverColor={'black'}
+          border="black"
+          onClick={() => setModalOpen(true)}
+          h="42px"
+          w="339px"
+        />
+        <AnimatedButton
+          text={'View Menu'}
+          bgColor={'white'}
+          hoverColor={'#00D072'}
+          clickURL={'/menu'}
+          h="42px"
+          w="339px"
+          arrow
+          arrowStart
+        />
+      </div>
       <div className="footer-container">
         <div className="above-footer">
           <a
@@ -176,11 +208,7 @@ export default function Homepage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image
-              src="https://cdn.shopify.com/s/files/1/0581/1011/5943/files/IG_LOGO.png?v=1736792345"
-              alt="Instagram Logo"
-              width={42}
-            />
+            <Image src={IG} alt="Instagram Logo" width={80} />
           </a>
           <p className="moderat-bold sign-up-text" style={{color: '#00CF77'}}>
             Salon Vert is part of Printemps new york, For more information sign

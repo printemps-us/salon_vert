@@ -22,6 +22,21 @@ export default async function handleRequest(
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
       storeDomain: context.env.PUBLIC_STORE_DOMAIN,
     },
+    scriptSrc: [
+      "'self'",
+      'https://cdn.shopify.com',
+      'https://formspree.io/',
+      "'unsafe-eval'",
+      'https://widgets.resy.com', // Add this line to allow the Resy script
+      // Include other allowed domains for script loading
+    ],
+    frameSrc: [
+      "'self'",
+      'https://cdn.shopify.com',
+      "'unsafe-eval'",
+      'https://widgets.resy.com', // Allow framing from Resy
+      // Add any other domains you need to allow framing from
+    ],
   });
 
   const body = await renderToReadableStream(
