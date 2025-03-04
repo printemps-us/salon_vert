@@ -27,6 +27,7 @@ export default async function handleRequest(
       'https://cdn.shopify.com',
       'https://formspree.io/',
       "'unsafe-eval'",
+      'https://eu2-api.eng.bloomreach.com',
       'https://widgets.resy.com', // Add this line to allow the Resy script
       // Include other allowed domains for script loading
     ],
@@ -37,6 +38,7 @@ export default async function handleRequest(
       'https://widgets.resy.com', // Allow framing from Resy
       // Add any other domains you need to allow framing from
     ],
+    connectSrc: ['https://eu2-api.eng.bloomreach.com'],
   });
 
   const body = await renderToReadableStream(
