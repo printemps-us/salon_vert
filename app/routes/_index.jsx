@@ -149,7 +149,7 @@ export default function Homepage() {
       <div className="footer-container">
         <div className="above-footer">
           <a
-            href="https://urlgeni.us/instagram/maisonpasserellenyc"
+            href="https://urlgeni.us/instagram/salonvertnyc"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -191,7 +191,8 @@ export default function Homepage() {
               className="footer-button"
               onClick={handleSubmit}
               disabled={!validEmail.test(email)}
-              style={{cursor: !validEmail.test(email) ? 'auto' : 'pointer'}}            >
+              style={{cursor: !validEmail.test(email) ? 'auto' : 'pointer'}}
+            >
               <p
                 className="moderat-bold"
                 style={{fontSize: '12px', color: 'white'}}

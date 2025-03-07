@@ -10,7 +10,6 @@ import {
   ScrollRestoration,
   isRouteErrorResponse,
 } from '@remix-run/react';
-import favicon from '~/assets/favicon.svg';
 import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 import tailwindCss from './styles/tailwind.css?url';
@@ -56,7 +55,7 @@ export function links() {
       rel: 'preconnect',
       href: 'https://shop.app',
     },
-    {rel: 'icon', type: 'image/svg+xml', href: favicon},
+    {rel: 'icon', type: 'image/png', href: '/favicon.png'},
   ];
 }
 
@@ -177,7 +176,7 @@ export function Layout({children}) {
           children
         )}
         <ScrollRestoration nonce={nonce} />
-        <Script src="app/components/functions/bloomreach.js" />
+        <Script src="/bloomreach.js" />
         <Script
           src="https://widgets.resy.com/embed.js"
           referrerPolicy="no-referrer"
