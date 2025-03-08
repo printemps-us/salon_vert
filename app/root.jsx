@@ -1,4 +1,4 @@
-import {useNonce, getShopAnalytics, Analytics} from '@shopify/hydrogen';
+import {useNonce, getShopAnalytics, Analytics, Script} from '@shopify/hydrogen';
 import {defer} from '@shopify/remix-oxygen';
 import {
   Links,
@@ -10,7 +10,6 @@ import {
   ScrollRestoration,
   isRouteErrorResponse,
 } from '@remix-run/react';
-import favicon from '~/assets/favicon.svg';
 import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 import tailwindCss from './styles/tailwind.css?url';
@@ -56,7 +55,7 @@ export function links() {
       rel: 'preconnect',
       href: 'https://shop.app',
     },
-    {rel: 'icon', type: 'image/svg+xml', href: favicon},
+    {rel: 'icon', type: 'image/png', href: '/favicon.png'},
   ];
 }
 
@@ -157,6 +156,10 @@ export function Layout({children}) {
         <link rel="stylesheet" href={tailwindCss}></link>
         <link rel="stylesheet" href={resetStyles}></link>
         <link rel="stylesheet" href={appStyles}></link>
+        <link
+          rel="stylesheet"
+          href="https://use.typekit.net/eiq4ccg.css"
+        ></link>
         <Meta />
         <Links />
       </head>
@@ -173,6 +176,11 @@ export function Layout({children}) {
           children
         )}
         <ScrollRestoration nonce={nonce} />
+        <Script src="/bloomreach.js" />
+        <Script
+          src="https://widgets.resy.com/embed.js"
+          referrerPolicy="no-referrer"
+        />
         <Scripts nonce={nonce} />
       </body>
     </html>
