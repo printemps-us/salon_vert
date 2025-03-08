@@ -30,6 +30,16 @@
   text-transform: uppercase;
 }
 
+.responsive-logo {
+  width: 450px;
+}
+
+@media (max-width: 640px) {
+  .responsive-logo {
+    width: 250px;
+  }
+}
+
 .h3-desktop {
   font-size: 28px;
   font-weight: 800;

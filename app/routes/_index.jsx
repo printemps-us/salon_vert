@@ -112,7 +112,9 @@ export default function Homepage() {
         api_key={'z4Ih9aYxtWx3obA8GxX8Rsa33g5mQzKZ'}
       ></RestaurantModal>
       <div className="main-area">
-        <div className="w-[450px]">
+        <div
+          className="responsive-logo "
+        >
           <Logo></Logo>
         </div>
         <p
