@@ -115,21 +115,42 @@ export default function Homepage() {
         <div className="responsive-logo ">
           <Logo></Logo>
         </div>
-        {/* <p className="moderat-bold" style={{color: '#00CF77'}}>
-          One Wall street, NY
-        </p> */}
+        <div className="flex flex-col items-center mt-10">
+          <p className="moderat-bold" style={{color: '#00CF77'}}>
+            HOURS
+          </p>
+          <p className="moderat-bold uppercase" style={{color: '#00CF77'}}>
+            Monday - Sunday: 11AM-7PM
+          </p>
+        </div>
+        <div className="mt-20">
+          <AnimatedButton
+            text={'Book with Resy'}
+            bgColor={'#1E783D'}
+            hoverColor={'#00CF77'}
+            textColor={'#00CF77'}
+            border="#00CF77"
+            hoverBorder={'#00CF77'}
+            onClick={() => setModalOpen(true)}
+            h="42px"
+            w="339px"
+          />
+        </div>
       </div>
-      <div className="h-auto w-full flex max-[835px]:flex-col gap-3 justify-center items-center mb-[100px] mt-[-100px]">
+
+      {/* <div className="h-auto w-full flex max-[835px]:flex-col gap-3 justify-center items-center">
         <AnimatedButton
           text={'Book with Resy'}
-          bgColor={'black'}
-          hoverColor={'black'}
-          border="black"
+          bgColor={'#1E783D'}
+          hoverColor={'#00CF77'}
+          textColor={'#00CF77'}
+          border="#00CF77"
+          hoverBorder={'#00CF77'}
           onClick={() => setModalOpen(true)}
           h="42px"
           w="339px"
-        />
-        {/* <AnimatedButton
+        /> */}
+      {/* <AnimatedButton
           text={'View Menu'}
           bgColor={'white'}
           hoverColor={'#00D072'}
@@ -139,7 +160,7 @@ export default function Homepage() {
           arrow
           arrowStart
         /> */}
-      </div>
+      {/* </div> */}
       <div className="footer-container">
         <div className="above-footer">
           <a
