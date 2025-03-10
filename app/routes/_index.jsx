@@ -115,12 +115,6 @@ export default function Homepage() {
         <div className="responsive-logo ">
           <Logo></Logo>
         </div>
-        <p
-          className="moderat-bold"
-          style={{fontSize: '1rem', color: '#00CF77'}}
-        >
-          Opening Soon
-        </p>
         {/* <p className="moderat-bold" style={{color: '#00CF77'}}>
           One Wall street, NY
         </p> */}
