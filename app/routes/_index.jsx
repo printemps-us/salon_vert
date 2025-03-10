@@ -112,9 +112,7 @@ export default function Homepage() {
         api_key={'z4Ih9aYxtWx3obA8GxX8Rsa33g5mQzKZ'}
       ></RestaurantModal>
       <div className="main-area">
-        <div
-          className="responsive-logo "
-        >
+        <div className="responsive-logo ">
           <Logo></Logo>
         </div>
         <p
@@ -127,7 +125,7 @@ export default function Homepage() {
           One Wall street, NY
         </p> */}
       </div>
-      {/* <div className="h-auto w-full flex max-[835px]:flex-col gap-3 justify-center items-center mb-[100px] mt-[-100px]">
+      <div className="h-auto w-full flex max-[835px]:flex-col gap-3 justify-center items-center mb-[100px] mt-[-100px]">
         <AnimatedButton
           text={'Book with Resy'}
           bgColor={'black'}
@@ -137,7 +135,7 @@ export default function Homepage() {
           h="42px"
           w="339px"
         />
-        <AnimatedButton
+        {/* <AnimatedButton
           text={'View Menu'}
           bgColor={'white'}
           hoverColor={'#00D072'}
@@ -146,8 +144,8 @@ export default function Homepage() {
           w="339px"
           arrow
           arrowStart
-        />
-      </div> */}
+        /> */}
+      </div>
       <div className="footer-container">
         <div className="above-footer">
           <a
