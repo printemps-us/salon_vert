@@ -15,11 +15,9 @@ async function loadStaticData({context}) {
 
     // Process the result
     const metaobjects = data.metaobjects.nodes[0];
-    console.log('test', metaobjects);
     return {
       staticData: metaobjects,
     };
-    console.log(metaobjects);
   } catch (error) {
     console.error('Error in loader:', error);
     // Handle or rethrow the error as needed
@@ -40,13 +38,13 @@ function menu() {
         </div>
       </div>
       <div className="flex flex-col items-center gap-[120px] py-[50px] my-[60px]">
-        {data?.staticData.content?.references.nodes.map((item, index) => (
+        {data?.staticData.content?.references?.nodes.map((item, index) => (
           <div
             key={`${item.title.value}_title_${index}`}
             className="section flex flex-col items-center gap-8"
           >
             <h3 className="h3-desktop pb-3">{item.title.value}</h3>
-            {item.menu_items.references.nodes.map((item, index) => (
+            {item.menu_items?.references.nodes.map((item, index) => (
               <div
                 key={`${item.title.value}_item_${index}`}
                 className="gap-3 flex flex-col items-center"
