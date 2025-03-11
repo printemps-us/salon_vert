@@ -31,7 +31,7 @@ function menu() {
     <div>
       <div
         className="p-14 flex justify-center w-full"
-        style={{backgroundColor: '#1E783D'}}
+        style={{backgroundColor: '#006f43'}}
       >
         <div className="responsive-logo">
           <Logo></Logo>
