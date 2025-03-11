@@ -11,6 +11,8 @@ function AnimatedButton({
   hoverColor = '#00D072',
   bgColor = 'white',
   border = '#E7E7E7',
+  hoverBorder,
+  textColor,
   w,
   h,
   clickURL,
@@ -149,6 +151,8 @@ function AnimatedButton({
                     ? '#565656'
                     : (bgColor === 'black') | (bgColor === '#000000')
                     ? 'white'
+                    : textColor
+                    ? textColor
                     : 'black',
                 }}
               >
@@ -177,7 +181,7 @@ function AnimatedButton({
         style={{
           borderRadius,
           backgroundColor: hoverColor,
-          borderColor: hoverColor,
+          borderColor: hoverBorder ? hoverBorder : hoverColor,
         }}
         className="absolute border-1 flex items-center px-6 h-full w-full z-20"
       ></div>

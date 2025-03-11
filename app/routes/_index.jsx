@@ -6,6 +6,7 @@ import Logo from '~/components/Logo';
 import IG from '~/assets/SalonVertIG.png';
 import RestaurantModal from '~/components/RestaurantModal';
 import AnimatedButton from '~/components/AnimatedButton';
+import logo from '~/assets/SV_LOGO_031025.png';
 /**
  * @type {MetaFunction}
  */
@@ -85,14 +86,14 @@ export default function Homepage() {
       {email_id: email.toLowerCase()},
       {
         email: email.toLowerCase(),
-        data_source: 'restaurant',
+        data_source: 'salon vert',
       },
     );
     exponea.track('consent', {
       category: 'email',
       valid_until: 'unlimited',
       action: 'accept',
-      data_source: 'restaurant',
+      data_source: 'salon vert',
     });
     setState({
       isWaiting: false,
@@ -113,23 +114,44 @@ export default function Homepage() {
       ></RestaurantModal>
       <div className="main-area">
         <div className="responsive-logo ">
-          <Logo></Logo>
+          <img src={logo} alt="Salon Vert Logo"></img>
         </div>
-        {/* <p className="moderat-bold" style={{color: '#00CF77'}}>
-          One Wall street, NY
-        </p> */}
+        <div className="flex flex-col items-center mt-10">
+          <p className="moderat-bold" style={{color: '#00d58d'}}>
+            HOURS
+          </p>
+          <p className="moderat-bold uppercase" style={{color: '#00d58d'}}>
+            Monday - Sunday: 11AM-7PM
+          </p>
+        </div>
+        <div className="mt-20">
+          <AnimatedButton
+            text={'Book with Resy'}
+            bgColor={'#006f43'}
+            hoverColor={'#00d58d'}
+            textColor={'#00d58d'}
+            border="#00d58d"
+            hoverBorder={'#00d58d'}
+            onClick={() => setModalOpen(true)}
+            h="42px"
+            w="339px"
+          />
+        </div>
       </div>
-      <div className="h-auto w-full flex max-[835px]:flex-col gap-3 justify-center items-center mb-[100px] mt-[-100px]">
+
+      {/* <div className="h-auto w-full flex max-[835px]:flex-col gap-3 justify-center items-center">
         <AnimatedButton
           text={'Book with Resy'}
-          bgColor={'black'}
-          hoverColor={'black'}
-          border="black"
+          bgColor={'#006f43'}
+          hoverColor={'#00d58d'}
+          textColor={'#00d58d'}
+          border="#00d58d"
+          hoverBorder={'#00d58d'}
           onClick={() => setModalOpen(true)}
           h="42px"
           w="339px"
-        />
-        {/* <AnimatedButton
+        /> */}
+      {/* <AnimatedButton
           text={'View Menu'}
           bgColor={'white'}
           hoverColor={'#00D072'}
@@ -139,7 +161,7 @@ export default function Homepage() {
           arrow
           arrowStart
         /> */}
-      </div>
+      {/* </div> */}
       <div className="footer-container">
         <div className="above-footer">
           <a
@@ -149,7 +171,7 @@ export default function Homepage() {
           >
             <Image src={IG} alt="Instagram Logo" width={80} />
           </a>
-          <p className="moderat-bold sign-up-text" style={{color: '#00CF77'}}>
+          <p className="moderat-bold sign-up-text" style={{color: '#00d58d'}}>
             Salon Vert is part of Printemps new york, For more information sign
             up for our newsletter
           </p>
