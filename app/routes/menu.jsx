@@ -16,7 +16,6 @@ async function loadStaticData({context}) {
   try {
     // Run the query
     const data = await context.storefront.query(MENU_QUERY);
-
     // Process the result
     const metaobjects = data.metaobjects.nodes[0];
     return {
@@ -28,16 +27,29 @@ async function loadStaticData({context}) {
     throw new Error('Failed to load static data');
   }
 }
+
 function menu() {
   const data = useLoaderData();
+  const [width, setWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 0,
+  );
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  const isBigger =
+    width > data.staticData.content?.references.nodes.length * 140;
   const [currentSection, setCurrentSection] = useState(null);
   const roomsHeaderRef = useRef();
   const location = useLocation();
   const handleClick = () => {
     if (window.resyWidget) {
       resyWidget.openModal({
-        venueId: data.resy_button.reference.venueId?.value,
-        apiKey: data.resy_button.reference.api_key?.value,
+        venueId: data.resy_button?.reference?.venueId?.value,
+        apiKey: data.resy_button?.reference?.api_key?.value,
         replace: 'true',
       });
     } else {
@@ -133,7 +145,9 @@ function menu() {
       </div>
       <div
         ref={roomsHeaderRef}
-        className="flex hide-scrollbar px-8 gap-8 justify-start w-full overflow-x-auto sticky top-0 bg-white py-[18px] z-20"
+        className={`flex hide-scrollbar px-8 gap-8 ${
+          isBigger ? 'justify-center' : 'justify-start'
+        } overflow-x-auto sticky top-0 bg-white py-[18px] z-20`}
       >
         {data.staticData.content?.references.nodes.map((item, index) => (
           <button
@@ -149,8 +163,8 @@ function menu() {
               <div className="rounded-full w-full h-full overflow-hidden ">
                 <Image
                   className="h-full"
-                  src={item.image.reference.image.url}
-                  alt={item.image.reference.image.altText}
+                  src={item.image?.reference?.image.url}
+                  alt={item.image?.reference?.image.altText}
                   sizes="(min-width: 2em) 5em, 10em"
                 />
               </div>
@@ -162,7 +176,7 @@ function menu() {
                   : 'p-small-regular-desktop'
               } text-black-2`}
             >
-              {item.title.value}
+              {item.title?.value}
             </span>
           </button>
         ))}
@@ -171,33 +185,37 @@ function menu() {
       <div className="flex flex-col items-center gap-[120px] py-[50px] my-[60px]">
         {data?.staticData.content?.references?.nodes.map((item, index) => (
           <div
-            key={`${item.title.value}_title_${index}`}
-            id={item.link.value}
+            key={`${item.title?.value}_title_${index}`}
+            id={item.link?.value}
             className="section flex flex-col items-center gap-8"
           >
-            <h3 className="h3-desktop pb-3 moderat-bold">{item.title.value}</h3>
+            <h3 className="h3-desktop pb-3 moderat-bold">
+              {item.title?.value}
+            </h3>
             {item.menu_items?.references.nodes.map((item, index) => (
               <div
-                key={`${item.title.value}_item_${index}`}
+                key={`${item.title?.value}_item_${index}`}
                 className="gap-3 flex flex-col items-center"
               >
                 <p className="p-standard-bold-desktop uppercase urbanist">
-                  {item.title.value}
+                  {item.title?.value}
                 </p>
-                <div className="flex urbanist">
-                  {JSON.parse(item.ingredients.value).map(
-                    (ingredient, index, array) => (
-                      <p
-                        key={`${ingredient}_item_${index}`}
-                        className="p-small-regular-desktop text-black-2"
-                      >
-                        {ingredient}
-                        {index < array.length - 1 && '・'}
-                      </p>
-                    ),
-                  )}
-                </div>
-                <p className="p-small-bold-desktop">${item.price.value}</p>
+                {item.ingredients && (
+                  <div className="flex urbanist">
+                    {JSON.parse(item.ingredients?.value).map(
+                      (ingredient, index, array) => (
+                        <p
+                          key={`${ingredient}_item_${index}`}
+                          className="p-small-regular-desktop text-black-2"
+                        >
+                          {ingredient}
+                          {index < array.length - 1 && '・'}
+                        </p>
+                      ),
+                    )}
+                  </div>
+                )}
+                <p className="p-small-bold-desktop">${item.price?.value}</p>
               </div>
             ))}
           </div>
