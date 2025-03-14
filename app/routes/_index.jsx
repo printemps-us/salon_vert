@@ -78,10 +78,7 @@ export default function Homepage() {
     /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
   );
 
-  console.log(state);
-
   function handleSubmit() {
-    console.log('tirrger');
     exponea.identify(
       {email_id: email.toLowerCase()},
       {

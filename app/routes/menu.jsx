@@ -30,7 +30,6 @@ async function loadStaticData({context}) {
 }
 function menu() {
   const data = useLoaderData();
-  console.log(useLoaderData());
   const [currentSection, setCurrentSection] = useState(null);
   const roomsHeaderRef = useRef();
   const location = useLocation();
@@ -47,7 +46,6 @@ function menu() {
   };
   const handleLinkClick = (e, linkValue) => {
     e.preventDefault(); // Prevent default anchor behavior
-    console.log(linkValue);
     const target = document.querySelector(linkValue);
     if (target) {
       window.scrollTo({
@@ -177,16 +175,16 @@ function menu() {
             id={item.link.value}
             className="section flex flex-col items-center gap-8"
           >
-            <h3 className="h3-desktop pb-3">{item.title.value}</h3>
+            <h3 className="h3-desktop pb-3 moderat-bold">{item.title.value}</h3>
             {item.menu_items?.references.nodes.map((item, index) => (
               <div
                 key={`${item.title.value}_item_${index}`}
                 className="gap-3 flex flex-col items-center"
               >
-                <p className="p-standard-bold-desktop uppercase">
+                <p className="p-standard-bold-desktop uppercase urbanist">
                   {item.title.value}
                 </p>
-                <div className="flex">
+                <div className="flex urbanist">
                   {JSON.parse(item.ingredients.value).map(
                     (ingredient, index, array) => (
                       <p

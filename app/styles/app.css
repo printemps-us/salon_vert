@@ -12,6 +12,13 @@
   text-transform: uppercase;
 }
 
+.urbanist {
+  font-family: "Urbanist", serif;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+}
+
 :root {
   --aside-width: 400px;
   --cart-aside-summary-height-with-discount: 300px;
@@ -308,6 +315,7 @@
   letter-spacing: 1px;
   text-transform: uppercase;
 }
+
 .hide-scrollbar {
   /* For Firefox */
   scrollbar-width: none;
@@ -325,6 +333,7 @@
   -webkit-appearance: none;
   /* For Chrome, Safari, and Opera */
 }
+
 img {
   border-radius: 4px;
 }
