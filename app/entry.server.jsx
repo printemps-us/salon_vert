@@ -28,8 +28,16 @@ export default async function handleRequest(
       'https://some-custom-css.cdn',
       'https://fonts.googleapis.com',
       'https://fonts.gstatic.com',
+      'https://use.typekit.net',
+      'https://p.typekit.net',
     ],
-    fontSrc: ['https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
+    fontSrc: [
+      "'self'",
+      'https://fonts.googleapis.com',
+      'https://fonts.gstatic.com',
+      'https://use.typekit.net',
+      'https://p.typekit.net',
+    ],
     scriptSrc: [
       "'self'",
       'https://cdn.shopify.com',
