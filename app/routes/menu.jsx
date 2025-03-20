@@ -8,7 +8,7 @@ import {
   Link,
   useLocation,
 } from '@remix-run/react';
-import {Image} from '@shopify/hydrogen';
+import {Image, getSeoMeta} from '@shopify/hydrogen';
 import gsap from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import SmoothScroll from '~/components/SmoothScroll';
@@ -18,7 +18,15 @@ export async function loader(args) {
 
   return defer({...staticData});
 }
-
+export const meta = ({data}) => {
+  // pass your SEO object to getSeoMeta()
+  return getSeoMeta({
+    title: 'Salon Vert - Printemps New York - Menu',
+    description:
+      "Salon Vert, a Parisian-inspired raw bar by Chef Gregory Gourdet, serves fresh seafood, bold Haitian flavors, and a signature mignonette. ",
+    // image: data.staticData.seo?.reference.image?.reference?.image.url,
+  });
+};
 async function loadStaticData({context}) {
   try {
     // Run the query
@@ -245,7 +253,7 @@ function menu() {
                 <div
                   className={`${
                     currentSection == item?.link?.value ? 'border-2' : ''
-                  } border-white-4 h-[100px] p-0.5 rounded-full room w-full`}
+                  } border-[#00d58d] h-[100px] p-0.5 rounded-full room w-full`}
                 >
                   <div className=" rounded-full w-full h-full overflow-hidden ">
                     <Image

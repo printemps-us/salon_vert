@@ -1,7 +1,7 @@
 import {defer} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link} from '@remix-run/react';
 import {Suspense, useState} from 'react';
-import {Image, Money} from '@shopify/hydrogen';
+import {Image, Money, getSeoMeta} from '@shopify/hydrogen';
 import Logo from '~/components/Logo';
 import IG from '~/assets/SalonVertIG.png';
 import RestaurantModal from '~/components/RestaurantModal';
@@ -10,8 +10,14 @@ import logo from '~/assets/SV_LOGO_031025.png';
 /**
  * @type {MetaFunction}
  */
-export const meta = () => {
-  return [{title: 'Salon Vert'}];
+export const meta = ({data}) => {
+  // pass your SEO object to getSeoMeta()
+  return getSeoMeta({
+    title: 'Salon Vert - Sip and Savor',
+    description:
+      'Tucked beside our landmarked Red Room, Salon Vert is a classic cocktail bar with unconventional concoctions and small bites with a nod to the classic Parisian raw bar. ',
+    // image: data.staticData.seo?.reference.image?.reference?.image.url,
+  });
 };
 
 /**
