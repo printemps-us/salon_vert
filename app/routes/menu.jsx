@@ -157,9 +157,9 @@ function menu() {
       // Header border animation
       gsap.fromTo(
         roomsHeaderRef.current,
-        {borderBottom: '1px solid white'},
+        {borderBottom: '1px solid #006f43'},
         {
-          borderBottom: '1px solid #E7E7E7',
+          borderBottom: '1px solid #00d58d',
           scrollTrigger: {
             trigger: roomsHeaderRef.current,
             start: '15% 20%',
@@ -231,6 +231,7 @@ function menu() {
         className="flex gap-8 w-full px-8 sticky hide-scrollbar top-[0px] bg-white py-[18px] z-20 overflow-x-scroll"
         style={{
           paddingLeft: `max((100vw - ${nodesWithLinks * 132}px) / 2, 0px)`,
+          backgroundColor: '#006f43'
         }}
       >
         {data?.staticData.content?.references?.nodes?.map((item, index) => (
@@ -264,7 +265,7 @@ function menu() {
                     currentSection == item?.link?.value
                       ? 'p-small-bold-desktop'
                       : 'p-small-regular-desktop'
-                  } text-black-2`}
+                  } text-white`}
                 >
                   {item?.master_header?.value
                     ? item?.master_header?.value
