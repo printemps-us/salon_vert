@@ -121,7 +121,7 @@ export default function Homepage() {
             Monday - Sunday: 11AM-7PM
           </p>
         </div>
-        <div className="mt-20">
+        <div className="mt-20 flex flex-col gap-4">
           <AnimatedButton
             text={'Book with Resy'}
             bgColor={'#006f43'}
@@ -132,6 +132,19 @@ export default function Homepage() {
             onClick={() => setModalOpen(true)}
             h="42px"
             w="339px"
+          />
+          <AnimatedButton
+            text={'View Menu'}
+            bgColor={'#006f43'}
+            hoverColor={'#00d58d'}
+            textColor={'#00d58d'}
+            border="#00d58d"
+            hoverBorder={'#00d58d'}
+            clickURL={'/menu'}
+            h="42px"
+            w="339px"
+            arrow
+            arrowStart
           />
         </div>
       </div>
@@ -148,16 +161,7 @@ export default function Homepage() {
           h="42px"
           w="339px"
         /> */}
-      {/* <AnimatedButton
-          text={'View Menu'}
-          bgColor={'white'}
-          hoverColor={'#00D072'}
-          clickURL={'/menu'}
-          h="42px"
-          w="339px"
-          arrow
-          arrowStart
-        /> */}
+
       {/* </div> */}
       <div className="footer-container">
         <div className="above-footer">

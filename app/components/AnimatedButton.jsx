@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import Arrow from '~/assets/Arrow-right.svg';
+import Arrow2 from '~/assets/arrow2.svg';
 import {useNavigate} from '@remix-run/react';
 import gsap from 'gsap';
 import ButtonLoadingAnimation from './ButtonLoadingAnimation';
@@ -89,7 +90,7 @@ function AnimatedButton({
         <div className="absolute top-0 right-4 z-30 overflow-hidden h-full flex items-center w-6">
           {arrow && (
             <img
-              src={Arrow}
+              src={Arrow2}
               ref={ArrowHiddenRef}
               alt="Arrow"
               height={10}

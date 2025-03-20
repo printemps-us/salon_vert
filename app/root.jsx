@@ -55,6 +55,16 @@ export function links() {
       rel: 'preconnect',
       href: 'https://shop.app',
     },
+    {
+      rel: 'prefetch', // Preload critical CSS
+      href: tailwindCss,
+      as: 'style',
+    },
+    {
+      rel: 'preload', // Preload critical CSS
+      href: appStyles,
+      as: 'style',
+    },
     {rel: 'icon', type: 'image/png', href: '/favicon.png'},
   ];
 }
@@ -167,7 +177,7 @@ export function Layout({children}) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body style={{display: 'none'}} className="!flex">
         {data ? (
           <Analytics.Provider
             cart={data.cart}
@@ -179,7 +189,6 @@ export function Layout({children}) {
         ) : (
           children
         )}
-        <ScrollRestoration nonce={nonce} />
         <Script src="/bloomreach.js" />
         <Script
           src="https://widgets.resy.com/embed.js"

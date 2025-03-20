@@ -1,11 +1,18 @@
 import React, {useRef, useState, useEffect} from 'react';
 import Logo from '~/components/Logo';
-import {data, useLoaderData, defer} from '@remix-run/react';
+import {
+  data,
+  useLoaderData,
+  defer,
+  useNavigate,
+  Link,
+  useLocation,
+} from '@remix-run/react';
 import {Image} from '@shopify/hydrogen';
-import {Link, useLocation} from '@remix-run/react';
 import gsap from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import SmoothScroll from '~/components/SmoothScroll';
+
 export async function loader(args) {
   const staticData = await loadStaticData(args);
 
@@ -30,6 +37,9 @@ async function loadStaticData({context}) {
 
 function menu() {
   const data = useLoaderData();
+  const navigate = useNavigate();
+  const isInitialRender = useRef(true);
+
   const [width, setWidth] = useState(
     typeof window !== 'undefined' ? window.innerWidth : 0,
   );
@@ -66,156 +76,254 @@ function menu() {
       });
     }
   };
-  useEffect(() => {
-    if (location.hash) {
-      const target = document.querySelector(location.hash);
-      if (target) {
-        window.scrollTo({
-          top: target.offsetTop - 220, // Offset by 200px
-          behavior: 'smooth',
-        });
-      }
-    }
-  }, [location]);
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+  function organizeMenuItems(data) {
+    const result = [];
+    let currentArray = [];
 
-    gsap.utils.toArray('.room').forEach((room) => {
+    data.forEach((item) => {
+      if (item.master_header) {
+        // Start a new array for the master header
+        currentArray = [item];
+        result.push(currentArray);
+      } else if (!item.link) {
+        // Continue adding items under the current master header
+        currentArray.push(item);
+      } else {
+        // If there's a link, start a new array
+        currentArray = [item];
+        result.push(currentArray);
+      }
+    });
+
+    return result;
+  }
+  const organizedMenuItems = organizeMenuItems(
+    data.staticData.content.references.nodes,
+  );
+  useEffect(() => {
+    console.log('useeffect first', location);
+    gsap.registerPlugin(ScrollTrigger);
+    navigate(location.pathname, {replace: true});
+    // Wait for content to be ready
+    const initScrollTriggers = () => {
+      // Kill any existing ScrollTriggers first
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+
+      // Room size animations
+      gsap.utils.toArray('.room').forEach((room) => {
+        gsap.fromTo(
+          room,
+          {width: '100px', height: '100px'},
+          {
+            width: '75px',
+            height: '75px',
+            scrollTrigger: {
+              trigger: roomsHeaderRef.current,
+              start: '15% 20%',
+              end: '45% 20%',
+              toggleActions: 'play none none reverse',
+              scrub: true,
+              onEnterBack: () => setCurrentSection(null),
+              immediateRender: false,
+            },
+          },
+        );
+      });
+
+      // Section tracking
+      gsap.utils.toArray('.section').forEach((section) => {
+        console.log(section);
+        const sectionId = section.id;
+        // Find the corresponding node in data
+        const node = data?.staticData.content?.references?.nodes.find(
+          (n) => n?.link?.value === sectionId,
+        );
+        console.log(node);
+        if (!node) {
+          return;
+        }
+
+        ScrollTrigger.create({
+          trigger: section,
+          start: '-100px 25%',
+          end: '100% 25%',
+          toggleActions: 'play none none reverse',
+          onEnter: () => setCurrentSection(section.id),
+          onEnterBack: () => setCurrentSection(section.id),
+          immediateRender: false,
+        });
+      });
+
+      // Header border animation
       gsap.fromTo(
-        room,
-        {width: '100px', height: '100px'},
+        roomsHeaderRef.current,
+        {borderBottom: '1px solid white'},
         {
-          width: '75px',
-          height: '75px',
+          borderBottom: '1px solid #E7E7E7',
           scrollTrigger: {
-            id: 'header',
             trigger: roomsHeaderRef.current,
             start: '15% 20%',
-            end: '45% 20%',
+            end: '15% 20%',
             toggleActions: 'play none none reverse',
-            scrub: true,
-            onEnterBack: () => setCurrentSection(null),
+            immediateRender: false,
           },
         },
       );
-    });
-    gsap.utils.toArray('.section').forEach((section) => {
-      gsap.to(section, {
-        scrollTrigger: {
-          id: section.id + '_trigger',
-          trigger: section,
-          start: '-75px 25%',
-          end: '40% 25%',
-          toggleActions: 'play none none reverse',
-          onEnter: () => setCurrentSection(section.id), // Set current section when entering
-          onEnterBack: () => setCurrentSection(section.id),
-        },
-      });
-    });
-    gsap.fromTo(
-      roomsHeaderRef.current,
-      {borderBottom: '1px solid white'},
-      {
-        borderBottom: '1px solid #E7E7E7',
-        scrollTrigger: {
-          trigger: roomsHeaderRef.current,
-          start: '15% 20%',
-          end: '15% 20%',
-          toggleActions: 'play none none reverse',
-        },
-      },
-    );
-    window.onload = () => {
+
+      // Force a refresh after initialization
       ScrollTrigger.refresh();
     };
+
+    // Delay initialization and add a second refresh
+    const timer = setTimeout(() => {
+      initScrollTriggers();
+      setTimeout(() => ScrollTrigger.refresh(), 100);
+    }, 500);
+
     return () => {
-      // Clean up on component unmount
+      clearTimeout(timer);
       ScrollTrigger.killAll();
     };
   }, []);
+  useEffect(() => {
+    if (isInitialRender.current) {
+      isInitialRender.current = false; // Skip first render
+      console.log('locay', location);
+      return;
+    }
+
+    if (location.hash) {
+      const scrollToTarget = () => {
+        const target = document.querySelector(location.hash);
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 200,
+            behavior: 'smooth',
+          });
+        }
+      };
+
+      const timeout = setTimeout(() => {
+        requestAnimationFrame(scrollToTarget);
+      }, 0);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [location]);
+  // Empty dependency array since we want this to run once on mount
+  const nodesWithLinks =
+    data?.staticData.content?.references?.nodes?.filter(
+      (node) => node?.link?.value,
+    )?.length || 0;
+  console.log(organizedMenuItems);
   return (
     <SmoothScroll>
       <div
         className="p-14 flex justify-center w-full"
         style={{backgroundColor: '#006f43'}}
       >
-        <div className="responsive-logo">
+        <Link to={'/'} className="responsive-logo">
           <Logo></Logo>
-        </div>
+        </Link>
       </div>
       <div
         ref={roomsHeaderRef}
-        className={`flex hide-scrollbar px-8 gap-8 ${
-          isBigger ? 'justify-center' : 'justify-start'
-        } overflow-x-auto sticky top-0 bg-white py-[18px] z-20`}
+        className="flex gap-8 w-full px-8 sticky hide-scrollbar top-[0px] bg-white py-[18px] z-20 overflow-x-scroll"
+        style={{
+          paddingLeft: `max((100vw - ${nodesWithLinks * 132}px) / 2, 0px)`,
+        }}
       >
-        {data.staticData.content?.references.nodes.map((item, index) => (
-          <button
-            key={index}
-            className="text-center w-[100px] flex flex-col gap-3 cursor-pointer items-center link"
-            onClick={(e) => handleLinkClick(e, `#${item.link?.value}`)}
-          >
-            <div
-              className={`${
-                currentSection == item.link?.value ? 'border-2' : ''
-              } border-white-4 h-[100px] p-0.5 rounded-full room`}
-            >
-              <div className="rounded-full w-full h-full overflow-hidden ">
-                <Image
-                  className="h-full"
-                  src={item.image?.reference?.image.url}
-                  alt={item.image?.reference?.image.altText}
-                  sizes="(min-width: 2em) 5em, 10em"
-                />
-              </div>
-            </div>
-            <span
-              className={`${
-                currentSection == item.link?.value
-                  ? 'p-small-bold-desktop'
-                  : 'p-small-regular-desktop'
-              } text-black-2`}
-            >
-              {item.title?.value}
-            </span>
-          </button>
+        {data?.staticData.content?.references?.nodes?.map((item, index) => (
+          <>
+            {item?.link?.value && (
+              <Link
+                key={index}
+                className="text-center w-[100px] flex flex-col gap-3 cursor-pointer items-center link"
+                to={`#${item?.link?.value}`}
+              >
+                <div
+                  className={`${
+                    currentSection == item?.link?.value ? 'border-2' : ''
+                  } border-white-4 h-[100px] p-0.5 rounded-full room w-full`}
+                >
+                  <div className=" rounded-full w-full h-full overflow-hidden ">
+                    <Image
+                      className="h-full w-full object-cover"
+                      src={item?.image?.reference?.image?.url}
+                      alt={item?.image?.reference?.image?.altText}
+                      style={{
+                        objectFit: 'cover',
+                        objectPosition: 'center',
+                      }}
+                      sizes="(min-width: 2em) 5em, 10em"
+                    ></Image>
+                  </div>
+                </div>
+                <span
+                  className={`${
+                    currentSection == item?.link?.value
+                      ? 'p-small-bold-desktop'
+                      : 'p-small-regular-desktop'
+                  } text-black-2`}
+                >
+                  {item?.master_header?.value
+                    ? item?.master_header?.value
+                    : item?.title?.value}
+                </span>
+              </Link>
+            )}
+          </>
         ))}
       </div>
 
-      <div className="flex flex-col items-center gap-[120px] py-[50px] my-[60px]">
-        {data?.staticData.content?.references?.nodes.map((item, index) => (
+      <div
+        className="flex flex-col items-center gap-[120px] pt-[120px] pb-[300px]"
+        style={{
+          color: 'white',
+          backgroundColor: '#006f43',
+        }}
+      >
+        {organizedMenuItems.map((section, section_index) => (
           <div
-            key={`${item.title?.value}_title_${index}`}
-            id={item.link?.value}
+            key={`${section?.title?.value}_title_${section_index}`}
+            id={section[0]?.link?.value}
             className="section flex flex-col items-center gap-8"
           >
-            <h3 className="h3-desktop pb-3 moderat-bold">
-              {item.title?.value}
-            </h3>
-            {item.menu_items?.references.nodes.map((item, index) => (
+            {section.map((item, index) => (
               <div
-                key={`${item.title?.value}_item_${index}`}
-                className="gap-3 flex flex-col items-center"
+                key={`${item?.title?.value}_title_${index}`}
+                className="flex flex-col items-center gap-8"
               >
-                <p className="p-standard-bold-desktop uppercase urbanist">
-                  {item.title?.value}
-                </p>
-                {item.ingredients && (
-                  <div className="flex urbanist">
-                    {JSON.parse(item.ingredients?.value).map(
-                      (ingredient, index, array) => (
-                        <p
-                          key={`${ingredient}_item_${index}`}
-                          className="p-small-regular-desktop text-black-2"
-                        >
-                          {ingredient}
-                          {index < array.length - 1 && '・'}
-                        </p>
-                      ),
-                    )}
+                <h3 className="h3-desktop pb-3 moderat-bold">
+                  {item?.title?.value}
+                </h3>
+                {item?.menu_items?.references?.nodes?.map((item, index) => (
+                  <div
+                    key={`${item?.title?.value}_item_${index}`}
+                    className="gap-3 flex flex-col items-center"
+                  >
+                    <p className="p-standard-bold-desktop uppercase urbanist">
+                      {item.title.value}
+                    </p>
+                    <div className="flex urbanist">
+                      {item?.ingredients?.value &&
+                        JSON.parse(item?.ingredients?.value).map(
+                          (ingredient, index, array) => (
+                            <p
+                              key={`${ingredient}_item_${index}`}
+                              className="p-small-regular-desktop"
+                            >
+                              {ingredient}
+                              {index < array.length - 1 && '・'}
+                            </p>
+                          ),
+                        )}
+                    </div>
+                    <p className="p-small-bold-desktop">
+                      ${item?.price?.value}
+                    </p>
                   </div>
-                )}
-                <p className="p-small-bold-desktop">${item.price?.value}</p>
+                ))}
               </div>
             ))}
           </div>
@@ -241,6 +349,9 @@ const MENU_QUERY = `query StaticPageContent {
               link: field(key: "link") {
                 value
               }
+                master_header: field(key: "master_header") {
+              value
+            }
                 image: field(key: "image") {
                       reference {
                         ... on MediaImage {
