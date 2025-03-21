@@ -22,6 +22,22 @@ export default async function handleRequest(
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
       storeDomain: context.env.PUBLIC_STORE_DOMAIN,
     },
+    styleSrc: [
+      "'self'",
+      'https://cdn.shopify.com',
+      'https://some-custom-css.cdn',
+      'https://fonts.googleapis.com',
+      'https://fonts.gstatic.com',
+      'https://use.typekit.net',
+      'https://p.typekit.net',
+    ],
+    fontSrc: [
+      "'self'",
+      'https://fonts.googleapis.com',
+      'https://fonts.gstatic.com',
+      'https://use.typekit.net',
+      'https://p.typekit.net',
+    ],
     scriptSrc: [
       "'self'",
       'https://cdn.shopify.com',

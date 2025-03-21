@@ -1,7 +1,7 @@
 import {defer} from '@shopify/remix-oxygen';
 import {Await, useLoaderData, Link} from '@remix-run/react';
 import {Suspense, useState} from 'react';
-import {Image, Money} from '@shopify/hydrogen';
+import {Image, Money, getSeoMeta} from '@shopify/hydrogen';
 import Logo from '~/components/Logo';
 import IG from '~/assets/SalonVertIG.png';
 import RestaurantModal from '~/components/RestaurantModal';
@@ -10,8 +10,14 @@ import logo from '~/assets/SV_LOGO_031025.png';
 /**
  * @type {MetaFunction}
  */
-export const meta = () => {
-  return [{title: 'Salon Vert'}];
+export const meta = ({data}) => {
+  // pass your SEO object to getSeoMeta()
+  return getSeoMeta({
+    title: 'Salon Vert - Sip and Savor',
+    description:
+      'Tucked beside our landmarked Red Room, Salon Vert is a classic cocktail bar with unconventional concoctions and small bites with a nod to the classic Parisian raw bar. ',
+    // image: data.staticData.seo?.reference.image?.reference?.image.url,
+  });
 };
 
 /**
@@ -78,10 +84,7 @@ export default function Homepage() {
     /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
   );
 
-  console.log(state);
-
   function handleSubmit() {
-    console.log('tirrger');
     exponea.identify(
       {email_id: email.toLowerCase()},
       {
@@ -124,7 +127,7 @@ export default function Homepage() {
             Monday - Sunday: 11AM-7PM
           </p>
         </div>
-        <div className="mt-20">
+        <div className="mt-20 flex flex-col gap-4">
           <AnimatedButton
             text={'Book with Resy'}
             bgColor={'#006f43'}
@@ -135,6 +138,19 @@ export default function Homepage() {
             onClick={() => setModalOpen(true)}
             h="42px"
             w="339px"
+          />
+          <AnimatedButton
+            text={'View Menu'}
+            bgColor={'#006f43'}
+            hoverColor={'#00d58d'}
+            textColor={'#00d58d'}
+            border="#00d58d"
+            hoverBorder={'#00d58d'}
+            clickURL={'/menu'}
+            h="42px"
+            w="339px"
+            arrow
+            arrowStart
           />
         </div>
       </div>
@@ -151,16 +167,7 @@ export default function Homepage() {
           h="42px"
           w="339px"
         /> */}
-      {/* <AnimatedButton
-          text={'View Menu'}
-          bgColor={'white'}
-          hoverColor={'#00D072'}
-          clickURL={'/menu'}
-          h="42px"
-          w="339px"
-          arrow
-          arrowStart
-        /> */}
+
       {/* </div> */}
       <div className="footer-container">
         <div className="above-footer">
