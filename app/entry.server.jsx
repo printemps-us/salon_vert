@@ -30,6 +30,7 @@ export default async function handleRequest(
       'https://fonts.gstatic.com',
       'https://use.typekit.net',
       'https://p.typekit.net',
+      
     ],
     fontSrc: [
       "'self'",
@@ -43,6 +44,8 @@ export default async function handleRequest(
       'https://cdn.shopify.com',
       'https://formspree.io/',
       "'unsafe-eval'",
+      'https://www.googletagmanager.com',
+      'https://www.google-analytics.com',
       'https://eu2-api.eng.bloomreach.com',
       'https://widgets.resy.com', // Add this line to allow the Resy script
       // Include other allowed domains for script loading
@@ -54,7 +57,11 @@ export default async function handleRequest(
       'https://widgets.resy.com', // Allow framing from Resy
       // Add any other domains you need to allow framing from
     ],
-    connectSrc: ['https://eu2-api.eng.bloomreach.com'],
+    connectSrc: [
+      'https://eu2-api.eng.bloomreach.com',
+      'https://www.googletagmanager.com',
+      'https://www.google-analytics.com',
+    ],
   });
 
   const body = await renderToReadableStream(
