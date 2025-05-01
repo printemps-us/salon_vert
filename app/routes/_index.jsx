@@ -127,7 +127,7 @@ export default function Homepage() {
             Monday - Sunday: 11AM-7PM
           </p>
         </div>
-        <div className="mt-20 flex flex-col gap-4">
+        <div className="mt-20 h-auto w-full flex flex-col gap-4 justify-center items-center">
           <AnimatedButton
             text={'Book with Resy'}
             bgColor={'#006f43'}
