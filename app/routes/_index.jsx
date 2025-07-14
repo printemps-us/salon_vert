@@ -15,7 +15,7 @@ export const meta = ({data}) => {
   return getSeoMeta({
     title: 'Salon Vert - Sip and Savor',
     description:
-      'Tucked beside our landmarked Red Room, Salon Vert is a classic cocktail bar with unconventional concoctions and small bites with a nod to the classic Parisian raw bar. ',
+      'A Parisian-inspired raw bar by Chef Gregory Gourdet, serving fresh seafood, bold Haitian flavors, and a signature mignonette.',
     // image: data.staticData.seo?.reference.image?.reference?.image.url,
   });
 };
