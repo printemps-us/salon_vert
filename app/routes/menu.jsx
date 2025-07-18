@@ -314,7 +314,7 @@ function menu() {
                     <p className="p-standard-bold-desktop uppercase urbanist text-center">
                       {item.title.value}
                     </p>
-                    <div className="flex urbanist">
+                    <div className="flex urbanist flex-wrap items-center justify-center">
                       {item?.ingredients?.value &&
                         JSON.parse(item?.ingredients?.value).map(
                           (ingredient, index, array) => (
