@@ -23,7 +23,7 @@ function RestaurantModal({
   return (
     <>
       {openModal && (
-        <div className="z-80 fixed top-0 left-0 w-screen h-screen bg-black-op40 flex items-center justify-center px-6">
+        <div className="z-110 fixed top-[-100px] left-0 w-screen h-[calc(100vh+100px)] bg-black-op40 flex items-center justify-center px-6">
           <div className="bg-white rounded-xl flex flex-col items-center px-6 pt-[18px] pb-6 gap-8">
             <div className="relative w-full">
               <div className="w-full flex justify-end mb-2">
@@ -66,7 +66,7 @@ function RestaurantModal({
               <AnimatedButton
                 text={'Open In The Resy App'}
                 bgColor={'white'}
-                hoverColor={'#00D072'}
+                hoverColor={'#00d58d'}
                 h={isMobile ? '42px' : '42px'}
                 w={isMobile ? '225px' : '339px'}
                 onClick={() => window.open(link)}

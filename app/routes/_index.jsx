@@ -7,131 +7,70 @@ import IG from '~/assets/SalonVertIG.png';
 import RestaurantModal from '~/components/RestaurantModal';
 import AnimatedButton from '~/components/AnimatedButton';
 import logo from '~/assets/SV_LOGO_031025.png';
-/**
- * @type {MetaFunction}
- */
-export const meta = ({data}) => {
-  // pass your SEO object to getSeoMeta()
-  return getSeoMeta({
-    title: 'Salon Vert - Sip and Savor',
-    description:
-      'A Parisian-inspired raw bar by Chef Gregory Gourdet, serving fresh seafood, bold Haitian flavors, and a signature mignonette.',
-    // image: data.staticData.seo?.reference.image?.reference?.image.url,
-  });
-};
-
+import FooterComponent from '~/components/FooterComponent';
+import {createStaticDataLoader} from '~/components/functions/loadStaticData';
+import {HOME_QUERY} from '~/components/query/homeQuery';
+import StoreInfo from '~/components/StoreInfo';
+import RoomCard from '~/components/RoomCard';
+import useIsMobile from '~/components/functions/isMobile';
+import HomePageMobile from '~/components/mobile/HomePageMobile';
 /**
  * @param {LoaderFunctionArgs} args
  */
-export async function loader(args) {
-  // Start fetching non-critical data without blocking time to first byte
-  const deferredData = loadDeferredData(args);
+export const loader = createStaticDataLoader(HOME_QUERY);
 
-  // Await the critical data required to render initial state of the page
-  const criticalData = await loadCriticalData(args);
-
-  return defer({...deferredData, ...criticalData});
-}
-
-/**
- * Load data necessary for rendering content above the fold. This is the critical data
- * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
- * @param {LoaderFunctionArgs}
- */
-async function loadCriticalData({context}) {
-  const [{collections}] = await Promise.all([
-    context.storefront.query(FEATURED_COLLECTION_QUERY),
-    // Add other queries here, so that they are loaded in parallel
-  ]);
-
-  return {
-    featuredCollection: collections.nodes[0],
-  };
-}
-
-/**
- * Load data for rendering content below the fold. This data is deferred and will be
- * fetched after the initial page load. If it's unavailable, the page should still 200.
- * Make sure to not throw any errors here, as it will cause the page to 500.
- * @param {LoaderFunctionArgs}
- */
-function loadDeferredData({context}) {
-  const recommendedProducts = context.storefront
-    .query(RECOMMENDED_PRODUCTS_QUERY)
-    .catch((error) => {
-      // Log query errors, but don't throw them so the page can still render
-      console.error(error);
-      return null;
-    });
-
-  return {
-    recommendedProducts,
-  };
-}
+export const meta = ({data}) => {
+  return getSeoMeta({
+    title: data?.staticData?.seo?.reference?.title?.value,
+    description: data?.staticData?.seo?.reference?.description?.value,
+    image: data?.staticData?.seo?.reference?.image?.reference?.image?.url,
+  });
+};
 
 export default function Homepage() {
-  const [email, setEmail] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
-  const [state, setState] = useState({
-    isWaiting: false,
-    isSubmitted: false,
-    isError: false,
-  });
-  const url = 'https://printempsnewyork.activehosted.com/proc.php?jsonp=true';
-
-  // NOTE • Valid Email checker
-  const validEmail = RegExp(
-    /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
-  );
-
-  function handleSubmit() {
-    exponea.identify(
-      {email_id: email.toLowerCase()},
-      {
-        email: email.toLowerCase(),
-        data_source: 'salon vert',
-      },
-    );
-    exponea.track('consent', {
-      category: 'email',
-      valid_until: 'unlimited',
-      action: 'accept',
-      data_source: 'salon vert',
-    });
-    setState({
-      isWaiting: false,
-      isSubmitted: true,
-    });
-  }
 
   /** @type {LoaderReturnData} */
-  const data = useLoaderData();
+  const {staticData, isMobile} = useLoaderData();
+  const isMobileActive = useIsMobile(isMobile);
+
+  // If mobile, render the mobile version
+  if (isMobileActive) {
+    return <HomePageMobile staticData={staticData} />;
+  }
+  console.log(staticData);
+  // Desktop version
   return (
-    <div className="background">
+    <div>
       <RestaurantModal
         setOpenModal={setModalOpen}
         openModal={modalOpen}
-        venue_id={'87092'}
-        link={'https://resy.com/cities/new-york-ny/venues/salon-vert'}
-        api_key={'z4Ih9aYxtWx3obA8GxX8Rsa33g5mQzKZ'}
+        venue_id={'87094'}
+        link={'https://resy.com/cities/new-york-ny/venues/maison-passerelle'}
+        api_key={'bJMvYfY5EA6goX7ncWUkx9PMjXdA5v66'}
       ></RestaurantModal>
-      <div className="main-area">
-        <div className="responsive-logo ">
-          <img src={logo} alt="Salon Vert Logo"></img>
-        </div>
-        <div className="flex flex-col items-center mt-10">
-          <p className="moderat-bold" style={{color: '#00d58d'}}>
+      <div className="bg-[#006f43] flex flex-col items-center gap-2 py-[100px]">
+        <Image
+          className="logo"
+          src={logo}
+          width={'250px'}
+          sizes="(min-width: 35em) 60vw, 70vw"
+          alt="Maison Passerelle Logo"
+        ></Image>
+        <div className='mt-4'>
+          <p className="moderat-bold text-center" style={{color: '#00d58d'}}>
             HOURS
           </p>
-          <p className="moderat-bold uppercase" style={{color: '#00d58d'}}>
-            Monday - Sunday: 11AM-7PM
+          <p className="moderat-bold text-center" style={{color: '#00d58d'}}>
+            MONDAY - SUNDAY, 11AM - 7PM
           </p>
         </div>
-        <div className="mt-20 h-auto w-full flex flex-col gap-4 justify-center items-center">
+
+        <div className="mt-16  h-auto w-full flex max-[835px]:flex-col gap-3 justify-center items-center">
           <AnimatedButton
             text={'Book with Resy'}
             bgColor={'#006f43'}
-            hoverColor={'#00d58d'}
+            hoverColor={'#006f43'}
             textColor={'#00d58d'}
             border="#00d58d"
             hoverBorder={'#00d58d'}
@@ -142,154 +81,103 @@ export default function Homepage() {
           <AnimatedButton
             text={'View Menu'}
             bgColor={'#006f43'}
-            hoverColor={'#00d58d'}
+            hoverColor={'#006f43'}
             textColor={'#00d58d'}
             border="#00d58d"
             hoverBorder={'#00d58d'}
             clickURL={'/menu'}
             h="42px"
             w="90%"
-            arrow
-            arrowStart
+          />
+        </div>
+      </div>
+      <div className="w-full flex flex-col items-center justify-center h-[200px] text-center my-6">
+        <p className="w-[450px] p-standard-medium-desktop text-black-2">
+          {staticData.about_sub.value}
+        </p>
+      </div>
+      <div className="flex gap-2 w-full overflow-y-hidden hide-scrollbar h-[550px] no-overscroll px-8">
+        {staticData.about_options?.references.nodes.map((item, index) => (
+          <div key={item.id} id={item.header.value} className="flex-1">
+            <RoomCard
+              header={item.header.value}
+              sub={item.sub?.value}
+              button_text={item.button_text.value}
+              image={item.image.reference.image}
+              link={item.link?.value}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="h-[500px] bg-white-2 border-y-1 border-y-white-4 flex">
+        <div
+          className="flex-1 rounded-br-[300px]"
+          style={{
+            backgroundSize: 'cover', // Ensures the image covers the entire container
+            backgroundPosition: 'center', // Centers the image within the container
+            backgroundRepeat: 'no-repeat', // Prevents the image from repeating
+            backgroundImage: `url(${staticData.find_us_image.reference.image.url})`,
+          }}
+        ></div>
+        <div className="flex-1 flex-col flex justify-center items-center gap-6 text-center">
+          <h2 className="h2-desktop w-[220px]">
+            {staticData.find_us_title.value}
+          </h2>
+          <p className="w-[450px] p-standard-medium-desktop text-black-2">
+            {staticData.find_us_sub.value}
+          </p>
+          <AnimatedButton
+            h={'42px'}
+            w={'339px'}
+            text={staticData.find_us_button.reference.button_text.value}
+            bgColor={staticData.find_us_button.reference.color.value}
+            hoverColor={staticData.find_us_button.reference.hover_color?.value}
+            clickURL={staticData.find_us_button.reference?.link.value}
           />
         </div>
       </div>
 
-      {/* <div className="h-auto w-full flex max-[835px]:flex-col gap-3 justify-center items-center">
-        <AnimatedButton
-          text={'Book with Resy'}
-          bgColor={'#006f43'}
-          hoverColor={'#00d58d'}
-          textColor={'#00d58d'}
-          border="#00d58d"
-          hoverBorder={'#00d58d'}
-          onClick={() => setModalOpen(true)}
-          h="42px"
-          w="339px"
-        /> */}
+      <div className="w-full flex flex-col items-center justify-center h-[120px] text-center my-12">
+        <h2 className="h2-desktop">{staticData.title_header.value}</h2>
+        <p className="w-[450px] p-standard-medium-desktop text-black-2">
+          {staticData.title_sub.value}
+        </p>
+      </div>
+      <div className="flex gap-4 px-6 mb-10">
+        {staticData.title_images.references.nodes.map((item, index) => (
+          <div key={index} className="overflow-hidden rounded-xl h-[450px]">
+            <Image data={item.image} className="w-full h-full object-cover">
+              {/* your content here */}
+            </Image>
+          </div>
+        ))}
+      </div>
+      {/* <StoreInfo data={staticData.icons} bgColor={'#AF4145'}></StoreInfo> */}
 
-      {/* </div> */}
-      <div className="footer-container">
-        <div className="above-footer">
-          <a
-            href="https://urlgeni.us/instagram/salonvertnyc"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image src={IG} alt="Instagram Logo" width={80} />
-          </a>
-          <p className="moderat-bold sign-up-text" style={{color: '#00d58d'}}>
-            Salon Vert is part of Printemps new york, For more information sign
-            up for our newsletter
-          </p>
-        </div>
-
-        <div className="footer-area">
-          <p
-            className="moderat-bold"
-            style={{fontSize: '14px', color: 'black', marginRight: '8px'}}
-          >
-            {state.isSubmitted ? 'Merci!' : 'Sign up for our newsletter'}
-          </p>
-          {state.isSubmitted ? (
-            <p
-              className="moderat-bold"
-              style={{fontSize: '14px', color: 'black', marginRight: '8px'}}
-            >
-              Check your email for updates
-            </p>
-          ) : (
-            <input
-              className="moderat-bold footer-input bg-white"
-              value={email}
-              placeholder="Enter email address"
-              onChange={(e) => setEmail(e.target.value)}
-              style={{fontSize: '12px'}}
-            ></input>
-          )}
-          {state.isSubmitted ? (
-            <p></p>
-          ) : (
-            <button
-              className="footer-button"
-              onClick={handleSubmit}
-              disabled={!validEmail.test(email)}
-              style={{cursor: !validEmail.test(email) ? 'auto' : 'pointer'}}
-            >
-              <p
-                className="moderat-bold"
-                style={{fontSize: '12px', color: 'white'}}
-              >
-                Submit
-              </p>
-            </button>
-          )}
+      <div className="overflow-hidden w-full h-[300px]">
+        <Image
+          data={staticData.filler_image?.reference.image}
+          className="w-full h-full object-cover"
+        ></Image>
+      </div>
+      <div className="py-10 border-y-1 border-white-4 my-14 bg-white-2">
+        <p className="h2-desktop text-center">
+          {staticData.as_seen_header?.value}
+        </p>
+        <div className="pt-12 flex gap-10 items-center overflow-x-auto py-4 justify-center">
+          {staticData.as_seen_images?.references.nodes.map((item, index) => (
+            <div key={index} className="h-10 flex-shrink-0">
+              <Image
+                data={item.image}
+                className="h-full w-auto object-contain"
+              />
+            </div>
+          ))}
         </div>
       </div>
-    </div>
-  );
-}
 
-/**
- * @param {{
- *   collection: FeaturedCollectionFragment;
- * }}
- */
-function FeaturedCollection({collection}) {
-  if (!collection) return null;
-  const image = collection?.image;
-  return (
-    <Link
-      className="featured-collection"
-      to={`/collections/${collection.handle}`}
-    >
-      {image && (
-        <div className="featured-collection-image">
-          <Image data={image} sizes="100vw" />
-        </div>
-      )}
-      <h1>{collection.title}</h1>
-    </Link>
-  );
-}
-
-/**
- * @param {{
- *   products: Promise<RecommendedProductsQuery | null>;
- * }}
- */
-function RecommendedProducts({products}) {
-  return (
-    <div className="recommended-products">
-      <h2>Recommended Products</h2>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Await resolve={products}>
-          {(response) => (
-            <div className="recommended-products-grid">
-              {response
-                ? response.products.nodes.map((product) => (
-                    <Link
-                      key={product.id}
-                      className="recommended-product"
-                      to={`/products/${product.handle}`}
-                    >
-                      <Image
-                        data={product.images.nodes[0]}
-                        aspectRatio="1/1"
-                        sizes="(min-width: 45em) 20vw, 50vw"
-                      />
-                      <h4>{product.title}</h4>
-                      <small>
-                        <Money data={product.priceRange.minVariantPrice} />
-                      </small>
-                    </Link>
-                  ))
-                : null}
-            </div>
-          )}
-        </Await>
-      </Suspense>
-      <br />
+      <FooterComponent></FooterComponent>
     </div>
   );
 }

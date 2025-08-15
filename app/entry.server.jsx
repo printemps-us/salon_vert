@@ -61,6 +61,7 @@ export default async function handleRequest(
       'https://eu2-api.eng.bloomreach.com',
       'https://www.googletagmanager.com',
       'https://www.google-analytics.com',
+      'https://formspree.io/',
     ],
   });
 
