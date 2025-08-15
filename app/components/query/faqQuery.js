@@ -1,5 +1,5 @@
 export const FAQ_QUERY = `query StaticPageContent {
-  metaobjects(type: "faq_page", first: 10) {
+  metaobjects(type: "faqs", first: 10) {
     nodes {
       handle
       seo: field(key: "seo") {
