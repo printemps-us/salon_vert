@@ -25,11 +25,6 @@ function About() {
   const isMobileActive = useIsMobile(isMobile);
   const location = useLocation();
 
-  // If mobile, render the mobile version
-  if (isMobileActive) {
-    return <AboutMobile staticData={staticData} />;
-  }
-
   // Desktop version
   useEffect(() => {
     if (location.hash) {
@@ -51,6 +46,13 @@ function About() {
       return () => clearTimeout(timeout); // Cleanup
     }
   }, [location]);
+
+  
+  // If mobile, render the mobile version
+  if (isMobileActive) {
+    return <AboutMobile staticData={staticData} />;
+  }
+
   return (
     <div>
       <div className="overflow-hidden w-full h-[360px]">
