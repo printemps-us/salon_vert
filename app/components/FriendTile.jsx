@@ -1,6 +1,8 @@
 import React, {useRef} from 'react';
 import gsap from 'gsap';
-import logo from '../assets/SV_LOGO_031025.png'
+import logo from '../assets/SV_LOGO_031025.png';
+import Logo from './Logo';
+
 function FriendTile({
   header,
   sub,
@@ -31,12 +33,8 @@ function FriendTile({
         onMouseLeave={handleMouseLeave}
         className={` rounded-xl bg-[#006f43] flex-1 flex p-6 gap-3`}
       >
-        <div>
-          <img
-            src={logo}
-            alt="P logo"
-            className={`${is_mobile ? 'h-8' : 'h-10'}`}
-          ></img>
+        <div className="w-[60px] flex items-start justify-center pt-2">
+          <Logo />
         </div>
         <div className={`flex-1 ${is_mobile ? 'pt-0' : 'pt-2'}`}>
           <div className="flex flex-col">
@@ -58,7 +56,7 @@ function FriendTile({
           <div
             ref={containerRef}
             className={`flex flex-col gap-2 ${
-              is_mobile ? 'ml-[-40px]' : 'ml-[-55px]'
+              is_mobile ? 'ml-[-40px]' : 'ml-[-65px]'
             } h-0 overflow-hidden`}
           >
             <p
