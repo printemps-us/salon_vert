@@ -4,7 +4,7 @@ import AnimatedButton from '../AnimatedButton';
 import RestaurantModal from '../RestaurantModal';
 import RoomCard from '../RoomCard';
 import FooterMobile from './FooterMobile';
-
+import logo from '~/assets/SV_LOGO_031025.png';
 function HomePageMobile({staticData}) {
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -22,45 +22,24 @@ function HomePageMobile({staticData}) {
       <div className="bg-[#006f43] flex flex-col items-center gap-2 py-16 px-4">
         <Image
           className="logo"
-          src={
-            'https://cdn.shopify.com/s/files/1/0581/1011/5943/files/MaisonPasser.svg?v=1737053887'
-          }
-          width={'300px'}
+          src={logo}
+          width={'250px'}
           sizes="(min-width: 35em) 60vw, 70vw"
           alt="Maison Passerelle Logo"
         />
-        <p
-          className="moderat-bold text-center text-sm"
-          style={{color: '#00d58d'}}
-        >
-          ONE WALL STREET, NEW YORK, NEW YORK
-        </p>
-        <div>
+
+        <div className='mt-6'>
           <p
             className="moderat-bold text-center text-sm"
             style={{color: '#00d58d'}}
           >
-            SUNDAY - MONDAY
+            HOURS
           </p>
           <p
             className="moderat-bold text-center text-sm"
             style={{color: '#00d58d'}}
           >
-            5:00PM - 9:00PM
-          </p>
-        </div>
-        <div>
-          <p
-            className="moderat-bold text-center text-sm"
-            style={{color: '#00d58d'}}
-          >
-            TUESDAY - SATURDAY
-          </p>
-          <p
-            className="moderat-bold text-center text-sm"
-            style={{color: '#00d58d'}}
-          >
-            5:00PM - 10:00PM
+            MONDAY - SUNDAY, 11AM - 7PM
           </p>
         </div>
 
