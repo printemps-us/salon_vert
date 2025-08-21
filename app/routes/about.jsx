@@ -132,7 +132,7 @@ function About() {
           }
         />
       </div>
-      <QuoteBlock small data={staticData.chef_quote.reference}></QuoteBlock>
+      <QuoteBlock small data={staticData.architect_quote.reference}></QuoteBlock>
       <div className="h-12"></div>
       <FooterComponent></FooterComponent>
     </div>
