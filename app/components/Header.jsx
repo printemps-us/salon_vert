@@ -10,7 +10,7 @@ import {useLocation} from '@remix-run/react';
 import Homepage from '~/routes/_index';
 import useIsMobile from './functions/isMobile';
 import HeaderMobile from './mobile/HeaderMobile';
-import logo from '../assets/SV_LOGO_031025.png'
+import logo from '../assets/SV_LOGO_031025.png';
 
 function HeaderComponent({data, isMobile, pathname}) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -78,9 +78,9 @@ function HeaderComponent({data, isMobile, pathname}) {
         <RestaurantModal
           setOpenModal={setModalOpen}
           openModal={modalOpen}
-          venue_id={'87094'}
-          link={'https://resy.com/cities/new-york-ny/venues/maison-passerelle'}
-          api_key={'bJMvYfY5EA6goX7ncWUkx9PMjXdA5v66'}
+          venue_id={'87092'}
+          link={'https://resy.com/cities/new-york-ny/venues/salon-vert'}
+          api_key={'z4Ih9aYxtWx3obA8GxX8Rsa33g5mQzKZ'}
         />
         <HeaderMobile data={data} pathname={pathname} />
       </>
@@ -92,9 +92,9 @@ function HeaderComponent({data, isMobile, pathname}) {
       <RestaurantModal
         setOpenModal={setModalOpen}
         openModal={modalOpen}
-        venue_id={'87094'}
-        link={'https://resy.com/cities/new-york-ny/venues/maison-passerelle'}
-        api_key={'bJMvYfY5EA6goX7ncWUkx9PMjXdA5v66'}
+        venue_id={'87092'}
+        link={'https://resy.com/cities/new-york-ny/venues/salon-vert'}
+        api_key={'z4Ih9aYxtWx3obA8GxX8Rsa33g5mQzKZ'}
       ></RestaurantModal>
       <div className="w-full bg-[#006f43] flex justify-between sticky top-0 h-[100px] z-100">
         <div
@@ -147,7 +147,6 @@ function HeaderComponent({data, isMobile, pathname}) {
           </Link>
           <AnimatedButton
             text="RESERVE A TABLE"
-            clickURL="https://resy.com/cities/new-york-ny/venues/maison-passerelle"
             onClick={() => setModalOpen(true)}
             bgColor="#00d58d"
             textColor="#006f43"

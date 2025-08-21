@@ -8,6 +8,7 @@ import QuoteBlock from '~/components/QuoteBlock';
 import FooterComponent from '~/components/FooterComponent';
 import useIsMobile from '~/components/functions/isMobile';
 import AboutMobile from '~/components/mobile/AboutMobile';
+import MediaComponent from '~/components/MediaComponent';
 
 export const loader = createStaticDataLoader(ABOUT_QUERY);
 
@@ -59,7 +60,7 @@ function About() {
         ></Image>
       </div>
       <div
-        className="flex px-6 py-[60px] gap-12 rounded-b-xl bg-white z-20 relative rounded-t-xl mt-[-20px]"
+        className="flex px-6 py-[60px] gap-12 rounded-b-xl bg-white z-20 relative rounded-t-xl mt-[-20px] max-h-[500px]"
         id="printemp-ny"
       >
         <div className="flex-1 flex flex-col gap-8 pr-6">
@@ -70,15 +71,11 @@ function About() {
             {staticData.tradition_content.value}
           </p>
         </div>
-        <div className="flex-1 h-full w-full">
-          <Image
-            data={staticData.tradition_image.reference.image}
-            sizes="(min-width: 45em) 50vw, 100vw"
-            className="w-full h-full object-cover"
-          ></Image>
+        <div className="flex-1 w-full">
+          <MediaComponent data={staticData.tradition_image.reference} />
         </div>
       </div>
-      <div id='the-chef'>
+      <div id="the-chef">
         <PersonSection
           name={staticData.chef_section.reference.header.value}
           section={staticData.chef_section.reference.section.value}
@@ -101,11 +98,7 @@ function About() {
         id="printemp-ny"
       >
         <div className="flex-1 h-full w-full">
-          <Image
-            data={staticData.content_block_2_image.reference.image}
-            sizes="(min-width: 45em) 50vw, 100vw"
-            className="w-full h-full object-cover"
-          ></Image>
+          <MediaComponent data={staticData.content_block_2_image.reference} />
         </div>
         <div className="flex-1 flex flex-col gap-8 pr-6">
           <h2 className="h2-desktop mb-2">
@@ -116,17 +109,21 @@ function About() {
           </p>
         </div>
       </div>
-      <div id='the-architect'>
+      <div id="the-architect">
         <PersonSection
           name={staticData.architect_section.reference.header.value}
           section={staticData.architect_section.reference.section.value}
           filler1={
-            staticData.architect_section.reference.filler_image_1.reference.image
+            staticData.architect_section.reference.filler_image_1.reference
+              .image
           }
           filler2={
-            staticData.architect_section.reference.filler_image_2.reference.image
+            staticData.architect_section.reference.filler_image_2.reference
+              .image
           }
-          mainImg={staticData.architect_section.reference.main_image.reference.image}
+          mainImg={
+            staticData.architect_section.reference.main_image.reference.image
+          }
           content={
             staticData.architect_section.reference.executive_content_options
               .references.nodes
@@ -134,7 +131,7 @@ function About() {
         />
       </div>
       <QuoteBlock small data={staticData.chef_quote.reference}></QuoteBlock>
-      <div className='h-12'></div>
+      <div className="h-12"></div>
       <FooterComponent></FooterComponent>
     </div>
   );

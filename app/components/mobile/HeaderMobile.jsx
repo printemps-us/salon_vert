@@ -8,6 +8,7 @@ import Plus from '~/assets/Plus.svg';
 import Minus from '~/assets/Minus.svg';
 import CloseIcon from '~/assets/CloseIcon.svg';
 import gsap from 'gsap';
+import logo from '~/assets/SV_LOGO_031025.png';
 
 function HeaderMobile({data, pathname}) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -133,18 +134,12 @@ function HeaderMobile({data, pathname}) {
         >
           <Link to="/" onClick={handleMenuLinkClick}>
             <Image
-              src="https://cdn.shopify.com/s/files/1/0581/1011/5943/files/MaisonPasser.svg?v=1737053887"
-              width={200}
+              src={logo}
+              width={100}
               sizes="(min-width: 40em) 180px, 360px"
-              alt="Maison Passerelle Logo"
+              alt="Salon Vert Logo"
             />
           </Link>
-
-          <div className="mt-1 ml-1">
-            <p className="moderat-bold text-xs" style={{color: '#00d58d'}}>
-              ONE WALL STREET, NEW YORK, NEW YORK
-            </p>
-          </div>
         </div>
 
         {/* Mobile Menu Button */}
@@ -191,18 +186,12 @@ function HeaderMobile({data, pathname}) {
             <div className="flex flex-col">
               <Link to="/">
                 <Image
-                  src="https://cdn.shopify.com/s/files/1/0581/1011/5943/files/MaisonPasser.svg?v=1737053887"
-                  width={180}
+                  src={logo}
+                  width={120}
                   sizes="180px"
-                  alt="Maison Passerelle Logo"
+                  alt="Salon Vert Logo"
                 />
               </Link>
-              <p
-                className="moderat-bold text-[10px] mt-1"
-                style={{color: '#00d58d'}}
-              >
-                ONE WALL STREET, NEW YORK, NEW YORK
-              </p>
             </div>
             <button
               onClick={toggleMenu}
@@ -247,16 +236,35 @@ function HeaderMobile({data, pathname}) {
 
                 {activeAccordion === 'about' && (
                   <div className="pb-4 space-y-3 animate-fadeIn">
-                    {data?.links?.references.nodes.map((item, index) => (
-                      <Link
-                        key={`${item?.text?.value}_mobile`}
-                        to={item?.url?.value}
-                        className="block text-[#00d58d] text-opacity-80 text-base pl-4 py-3 hover:text-opacity-100 transition-opacity touch-manipulation"
-                        onClick={handleMenuLinkClick}
-                      >
-                        {item?.text?.value}
-                      </Link>
-                    ))}
+                    {data?.links?.references.nodes.map((item) => {
+                      const url = item?.url?.value;
+                      const isExternal =
+                        url &&
+                        !url.startsWith('/')
+                       
+
+                      return isExternal ? (
+                        <a
+                          key={`${item?.text?.value}_mobile`}
+                          href={url}
+                          className="moderat-bold block text-[#00d58d] text-opacity-80 text-base pl-4 py-3 hover:text-opacity-100 transition-opacity touch-manipulation"
+                          onClick={handleMenuLinkClick}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {item?.text?.value}
+                        </a>
+                      ) : (
+                        <Link
+                          key={`${item?.text?.value}_mobile`}
+                          to={url}
+                          className="moderat-bold block text-[#00d58d] text-opacity-80 text-base pl-4 py-3 hover:text-opacity-100 transition-opacity touch-manipulation"
+                          onClick={handleMenuLinkClick}
+                        >
+                          {item?.text?.value}
+                        </Link>
+                      );
+                    })}
                   </div>
                 )}
               </div>

@@ -45,9 +45,9 @@ export default function Homepage() {
       <RestaurantModal
         setOpenModal={setModalOpen}
         openModal={modalOpen}
-        venue_id={'87094'}
-        link={'https://resy.com/cities/new-york-ny/venues/maison-passerelle'}
-        api_key={'bJMvYfY5EA6goX7ncWUkx9PMjXdA5v66'}
+        venue_id={'87092'}
+        link={'https://resy.com/cities/new-york-ny/venues/salon-vert'}
+        api_key={'z4Ih9aYxtWx3obA8GxX8Rsa33g5mQzKZ'}
       ></RestaurantModal>
       <div className="bg-[#006f43] flex flex-col items-center gap-2 py-[100px]">
         <Image
@@ -146,7 +146,7 @@ export default function Homepage() {
       </div>
       <div className="flex gap-4 px-6 mb-10">
         {staticData.title_images.references.nodes.map((item, index) => (
-          <div key={index} className="overflow-hidden rounded-xl h-[450px]">
+          <div key={index} className="overflow-hidden flex-1 rounded-xl h-[450px]">
             <Image data={item.image} className="w-full h-full object-cover">
               {/* your content here */}
             </Image>
