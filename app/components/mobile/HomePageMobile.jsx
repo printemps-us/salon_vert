@@ -13,9 +13,9 @@ function HomePageMobile({staticData}) {
       <RestaurantModal
         setOpenModal={setModalOpen}
         openModal={modalOpen}
-        venue_id={'87094'}
-        link={'https://resy.com/cities/new-york-ny/venues/maison-passerelle'}
-        api_key={'bJMvYfY5EA6goX7ncWUkx9PMjXdA5v66'}
+        venue_id={'87092'}
+        link={'https://resy.com/cities/new-york-ny/venues/salon-vert'}
+        api_key={'z4Ih9aYxtWx3obA8GxX8Rsa33g5mQzKZ'}
       />
 
       {/* Hero Section */}
