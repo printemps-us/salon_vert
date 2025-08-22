@@ -40,7 +40,7 @@ function AboutMobile({staticData}) {
         <TraditionSectionMobile
           header={staticData.tradition_header.value}
           content={staticData.tradition_content.value}
-          image={staticData.tradition_image.reference.image}
+          image={staticData.tradition_image.reference}
         />
       </div>
 
@@ -61,7 +61,7 @@ function AboutMobile({staticData}) {
       <TraditionSectionMobile
         header={staticData.tradition_header.value}
         content={staticData.tradition_content.value}
-        image={staticData.tradition_image.reference.image}
+        image={staticData.tradition_image.reference}
         imageFirst={true}
       />
 
