@@ -100,7 +100,7 @@ function FooterComponent({instagram = false}) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Image src={IG} alt="Instagram Logo" width={60} />
+            <Image src={IG} alt="Instagram Logo" width={50} />
           </a>
         </div>
       </div>
