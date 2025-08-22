@@ -54,7 +54,7 @@ function FooterComponent({instagram = false}) {
           for our newsletter
         </p>
       </div>
-      <div className="footer-area">
+      <div className="footer-area h-[50px] overflow-hidden">
         <p
           className="moderat-bold"
           style={{fontSize: '14px', color: 'black', marginRight: '8px'}}
@@ -94,15 +94,15 @@ function FooterComponent({instagram = false}) {
             </p>
           </button>
         )}
-      </div>
-      <div className="absolute top-[35px] right-0">
-        <a
-          href="https://urlgeni.us/instagram/salonvertnyc"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image src={IG} alt="Instagram Logo" width={60} />
-        </a>
+        <div>
+          <a
+            href="https://urlgeni.us/instagram/salonvertnyc"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image src={IG} alt="Instagram Logo" width={60} />
+          </a>
+        </div>
       </div>
     </div>
   );
