@@ -132,7 +132,7 @@ export default function Homepage() {
             w={'339px'}
             text={staticData.find_us_button.reference.button_text.value}
             bgColor={staticData.find_us_button.reference.color.value}
-            hoverColor={staticData.find_us_button.reference.hover_color?.value}
+            hoverColor="#006f43"
             clickURL={staticData.find_us_button.reference?.link.value}
           />
         </div>
