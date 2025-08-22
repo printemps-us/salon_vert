@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import IG from '~/assets/SalonVertIG.png';
 import {Image} from '@shopify/hydrogen';
 
 function FooterMobile({instagram = false}) {
@@ -53,18 +54,21 @@ function FooterMobile({instagram = false}) {
             />
           </a>
         )}
-        <p className="moderat-bold text-center text-sm leading-relaxed" style={{color: '#00d58d'}}>
+        <p
+          className="moderat-bold text-center text-sm leading-relaxed"
+          style={{color: '#00d58d'}}
+        >
           Maison Passerelle is part of Printemps new york, For more information
           sign up for our newsletter
         </p>
       </div>
 
       {/* Footer Newsletter Section */}
-      <div className="bg-[#00d58d] flex flex-col items-center gap-4 py-6 px-4">
+      <div className="bg-[#00d58d] flex flex-col items-center gap-4 pt-6 px-4">
         <p className="moderat-bold text-center text-sm text-black">
           {state.isSubmitted ? 'Merci!' : 'Sign up for our newsletter'}
         </p>
-        
+
         {state.isSubmitted ? (
           <p className="moderat-bold text-center text-sm text-black">
             Check your email for updates
@@ -80,8 +84,8 @@ function FooterMobile({instagram = false}) {
             />
             <button
               className={`w-full py-3 px-6 rounded-md moderat-bold text-sm ${
-                validEmail.test(email) 
-                  ? 'bg-[#006f43] text-white' 
+                validEmail.test(email)
+                  ? 'bg-[#006f43] text-white'
                   : 'bg-gray-300 text-gray-500'
               }`}
               onClick={handleSubmit}
@@ -90,6 +94,15 @@ function FooterMobile({instagram = false}) {
             >
               Submit
             </button>
+            <div className="flex justify-center">
+              <a
+                href="https://urlgeni.us/instagram/salonvertnyc"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image src={IG} alt="Instagram Logo" width={80} />
+              </a>
+            </div>
           </div>
         )}
       </div>
