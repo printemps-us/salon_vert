@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import IG from '~/assets/SalonVertIG.png';
 import {Image} from '@shopify/hydrogen';
 function FooterComponent({instagram = false}) {
   const [state, setState] = useState({
@@ -33,7 +34,7 @@ function FooterComponent({instagram = false}) {
     /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
   );
   return (
-    <div className="footer-container">
+    <div className="footer-container relative overflow-hidden">
       <div className="above-footer bg-[#006f43]">
         {instagram && (
           <a
@@ -49,8 +50,8 @@ function FooterComponent({instagram = false}) {
           </a>
         )}
         <p className="moderat-bold sign-up-text" style={{color: '#00d58d'}}>
-          Salon Vert is part of Printemps new york, For more information
-          sign up for our newsletter
+          Salon Vert is part of Printemps new york, For more information sign up
+          for our newsletter
         </p>
       </div>
       <div className="footer-area">
@@ -93,6 +94,15 @@ function FooterComponent({instagram = false}) {
             </p>
           </button>
         )}
+      </div>
+      <div className="absolute top-[35px] right-0">
+        <a
+          href="https://urlgeni.us/instagram/salonvertnyc"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image src={IG} alt="Instagram Logo" width={60} />
+        </a>
       </div>
     </div>
   );
