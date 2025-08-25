@@ -55,7 +55,7 @@ export default function Homepage() {
           src={logo}
           width={'250px'}
           sizes="(min-width: 35em) 60vw, 70vw"
-          alt="Maison Passerelle Logo"
+          alt="Salon Vert Logo"
         ></Image>
         <div className='mt-4'>
           <p className="moderat-bold text-center" style={{color: '#00d58d'}}>

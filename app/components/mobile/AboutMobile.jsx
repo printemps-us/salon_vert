@@ -59,9 +59,9 @@ function AboutMobile({staticData}) {
 
       {/* Second Tradition Section */}
       <TraditionSectionMobile
-        header={staticData.tradition_header.value}
-        content={staticData.tradition_content.value}
-        image={staticData.tradition_image.reference}
+        header={staticData.content_block_2_header.value}
+        content={staticData.content_block_2_content.value}
+        image={staticData.content_block_2_image.reference}
         imageFirst={true}
       />
 

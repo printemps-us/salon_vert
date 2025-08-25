@@ -25,7 +25,7 @@ function HomePageMobile({staticData}) {
           src={logo}
           width={'250px'}
           sizes="(min-width: 35em) 60vw, 70vw"
-          alt="Maison Passerelle Logo"
+          alt="Salon Vert Logo"
         />
 
         <div className='mt-6'>

@@ -16,14 +16,14 @@ function FooterMobile({instagram = false}) {
       {email_id: email.toLowerCase()},
       {
         email: email.toLowerCase(),
-        data_source: 'maison passerelle',
+        data_source: 'Salon Vert',
       },
     );
     exponea.track('consent', {
       category: 'mp_email',
       valid_until: 'unlimited',
       action: 'accept',
-      data_source: 'maison passerelle',
+      data_source: 'Salon Vert',
     });
     setState({
       isWaiting: false,
@@ -58,7 +58,7 @@ function FooterMobile({instagram = false}) {
           className="moderat-bold text-center text-sm leading-relaxed"
           style={{color: '#00d58d'}}
         >
-          Maison Passerelle is part of Printemps new york, For more information
+          Salon Vert is part of Printemps new york, For more information
           sign up for our newsletter
         </p>
       </div>

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import logo from '~/assets/SV_LOGO_031025.png'
+import Logo from '~/components/Logo';
+
 function FriendTileMobile({header, sub, content_header, content_sub}) {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -16,10 +17,11 @@ function FriendTileMobile({header, sub, content_header, content_sub}) {
         }`}
       >
         {/* Logo */}
-        <div className='flex gap-4'>
-          <div className="flex-shrink-0">
-            <img src={logo} alt="MP logo" className=" h-10" />
+        <div className="flex gap-4">
+          <div className="w-[60px] flex items-start justify-center pt-2">
+            <Logo></Logo>
           </div>
+
           <div className="flex flex-col text-left">
             <span className="p-large-mobile uppercase text-black">
               {header}
