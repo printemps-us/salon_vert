@@ -107,7 +107,7 @@ function HeaderComponent({data, isMobile, pathname}) {
               src={logo}
               width={120} // ✅ number, not '50px'
               sizes="(min-width: 35em) 250px, 500px"
-              alt="Maison Passerelle Logo"
+              alt="Salon Vert Logo"
             />
           </Link>
 

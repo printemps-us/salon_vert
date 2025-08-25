@@ -1,6 +1,5 @@
 import React, {useRef} from 'react';
 import gsap from 'gsap';
-import logo from '../assets/SV_LOGO_031025.png';
 import Logo from './Logo';
 
 function FriendTile({
@@ -36,7 +35,7 @@ function FriendTile({
         <div className="w-[60px] flex items-start justify-center pt-2">
           <Logo />
         </div>
-        <div className={`flex-1 ${is_mobile ? 'pt-0' : 'pt-2'}`}>
+        <div className={`flex-1`}>
           <div className="flex flex-col">
             <span
               className={`${

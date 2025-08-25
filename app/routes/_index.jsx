@@ -14,6 +14,7 @@ import StoreInfo from '~/components/StoreInfo';
 import RoomCard from '~/components/RoomCard';
 import useIsMobile from '~/components/functions/isMobile';
 import HomePageMobile from '~/components/mobile/HomePageMobile';
+import SmoothScroll from '~/components/SmoothScroll';
 /**
  * @param {LoaderFunctionArgs} args
  */
@@ -41,7 +42,7 @@ export default function Homepage() {
   console.log(staticData);
   // Desktop version
   return (
-    <div>
+    <SmoothScroll>
       <RestaurantModal
         setOpenModal={setModalOpen}
         openModal={modalOpen}
@@ -55,7 +56,7 @@ export default function Homepage() {
           src={logo}
           width={'250px'}
           sizes="(min-width: 35em) 60vw, 70vw"
-          alt="Maison Passerelle Logo"
+          alt="Salon Vert Logo"
         ></Image>
         <div className='mt-4'>
           <p className="moderat-bold text-center" style={{color: '#00d58d'}}>
@@ -178,7 +179,7 @@ export default function Homepage() {
       </div>
 
       <FooterComponent></FooterComponent>
-    </div>
+    </SmoothScroll>
   );
 }
 
