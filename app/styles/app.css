@@ -28,7 +28,13 @@
   --color-dark: #000;
   --color-light: #fff;
 }
-
+body {
+  font-family: "Urbanist", serif;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+  margin: 0;
+}
 .a-button {
   font-size: 12px;
   font-weight: 600;
@@ -334,10 +340,6 @@
   /* For Chrome, Safari, and Opera */
 }
 
-img {
-  border-radius: 4px;
-}
-
 .background {
   background-color: #006f43;
   height: 100vh;
@@ -361,7 +363,7 @@ img {
   justify-content: center;
   align-items: center;
   gap: 14px;
-  margin-bottom: 12px;
+  padding: 12px;
 
 }
 
@@ -390,7 +392,7 @@ img {
 }
 
 .sign-up-text {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 @media (max-width: 820px) {

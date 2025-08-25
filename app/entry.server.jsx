@@ -30,7 +30,6 @@ export default async function handleRequest(
       'https://fonts.gstatic.com',
       'https://use.typekit.net',
       'https://p.typekit.net',
-      
     ],
     fontSrc: [
       "'self'",
@@ -39,6 +38,7 @@ export default async function handleRequest(
       'https://use.typekit.net',
       'https://p.typekit.net',
     ],
+    mediaSrc: ["'self'", 'https://salonvertnyc.myshopify.com'],
     scriptSrc: [
       "'self'",
       'https://cdn.shopify.com',
@@ -61,6 +61,7 @@ export default async function handleRequest(
       'https://eu2-api.eng.bloomreach.com',
       'https://www.googletagmanager.com',
       'https://www.google-analytics.com',
+      'https://formspree.io/',
     ],
   });
 
