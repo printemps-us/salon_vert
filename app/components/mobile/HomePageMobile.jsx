@@ -39,7 +39,7 @@ function HomePageMobile({staticData}) {
             className="moderat-bold text-center text-sm"
             style={{color: '#00d58d'}}
           >
-            MONDAY - SUNDAY, 11AM - 7PM
+            MONDAY - SUNDAY, 11AM - 8PM
           </p>
         </div>
 
