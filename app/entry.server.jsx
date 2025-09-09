@@ -42,6 +42,7 @@ export default async function handleRequest(
     scriptSrc: [
       "'self'",
       'https://cdn.shopify.com',
+      'https://a.klaviyo.com',
       'https://formspree.io/',
       "'unsafe-eval'",
       'https://www.googletagmanager.com',
@@ -59,6 +60,7 @@ export default async function handleRequest(
     ],
     connectSrc: [
       'https://eu2-api.eng.bloomreach.com',
+      'https://a.klaviyo.com',
       'https://www.googletagmanager.com',
       'https://www.google-analytics.com',
       'https://formspree.io/',

@@ -10,24 +10,56 @@ function FooterComponent({instagram = false}) {
   const [email, setEmail] = useState('');
   const url = 'https://printempsnewyork.activehosted.com/proc.php?jsonp=true';
 
-  function handleSubmit() {
-    exponea.identify(
-      {email_id: email.toLowerCase()},
-      {
-        email: email.toLowerCase(),
-        data_source: 'Salon Vert',
-      },
-    );
-    exponea.track('consent', {
-      category: 'mp_email',
-      valid_until: 'unlimited',
-      action: 'accept',
-      data_source: 'Salon Vert',
-    });
-    setState({
-      isWaiting: false,
-      isSubmitted: true,
-    });
+  async function handleSubmit() {
+    try {
+      const response = await fetch(
+        'https://a.klaviyo.com/client/subscriptions/?company_id=XZQ3Bm',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Revision: '2025-01-15', // required by Klaviyo
+          },
+          body: JSON.stringify({
+            data: {
+              type: 'subscription',
+              attributes: {
+                custom_source: 'Salon Vert Website',
+                profile: {
+                  data: {
+                    type: 'profile',
+                    attributes: {
+                      email,
+                      // first_name: firstName,
+                      // last_name: lastName,
+                    },
+                  },
+                },
+              },
+              relationships: {
+                list: {
+                  data: {
+                    type: 'list',
+                    id: 'R949bn', // your list ID
+                  },
+                },
+              },
+            },
+          }),
+        },
+      );
+
+      if (response.ok) {
+        setState({
+          isWaiting: false,
+          isSubmitted: true,
+        });
+      } else {
+        console.error('Failed to subscribe:', await response.json());
+      }
+    } catch (err) {
+      console.error('Error subscribing:', err);
+    }
   }
   // NOTE • Valid Email checker
   const validEmail = RegExp(
