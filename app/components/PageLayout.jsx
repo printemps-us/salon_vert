@@ -41,7 +41,7 @@ export function PageLayout({
         />
       )} */}
       <HeaderComponent
-        data={header.metaobjects.nodes[0]}
+        data={header.metaobjects.nodes}
         isMobile={isMobile}
         pathname={pathname}
       ></HeaderComponent>

@@ -198,15 +198,7 @@ function HeaderMobile({data, pathname}) {
               className="w-8 h-8 flex items-center justify-center touch-manipulation"
               aria-label="Close menu"
             >
-              <img
-                src={CloseIcon}
-                alt="Close"
-                className="w-5 h-5"
-                style={{
-                  filter:
-                    'brightness(0) saturate(100%) invert(91%) sepia(13%) saturate(638%) hue-rotate(7deg) brightness(96%) contrast(92%)',
-                }}
-              />
+              <img src={CloseIcon} alt="Close" className="w-5 h-5" />
             </button>
           </div>
 
@@ -222,26 +214,21 @@ function HeaderMobile({data, pathname}) {
                   className="w-full flex justify-between items-center text-[#00d58d] moderat-bold text-lg py-6 touch-manipulation"
                   aria-expanded={activeAccordion === 'about'}
                 >
-                  <span>ABOUT</span>
+                  <span style={{textRendering: 'geometricPrecision'}}>
+                    ABOUT
+                  </span>
                   <img
                     src={activeAccordion === 'about' ? Minus : Plus}
                     alt={activeAccordion === 'about' ? 'Collapse' : 'Expand'}
                     className="w-4 h-4"
-                    style={{
-                      filter:
-                        'brightness(0) saturate(100%) invert(91%) sepia(13%) saturate(638%) hue-rotate(7deg) brightness(96%) contrast(92%)',
-                    }}
                   />
                 </button>
 
                 {activeAccordion === 'about' && (
                   <div className="pb-4 space-y-3 animate-fadeIn">
-                    {data?.links?.references.nodes.map((item) => {
+                    {data[0]?.links?.references.nodes.map((item) => {
                       const url = item?.url?.value;
-                      const isExternal =
-                        url &&
-                        !url.startsWith('/')
-                       
+                      const isExternal = url && !url.startsWith('/');
 
                       return isExternal ? (
                         <a
@@ -276,13 +263,53 @@ function HeaderMobile({data, pathname}) {
                 LOCATION
               </Link>
               {/* Menu Link */}
-              <Link
-                to="/menu"
-                className="block border-b border-[#00d58d] border-opacity-20 text-[#00d58d] moderat-bold text-lg py-6 mb-1 border-opacity-20 touch-manipulation"
-                onClick={handleMenuLinkClick}
-              >
-                MENU
-              </Link>
+              <div className="border-b border-[#00d58d] border-opacity-20">
+                <button
+                  onClick={() => toggleAccordion('menu')}
+                  className="w-full flex justify-between items-center text-[#00d58d] moderat-bold text-lg py-6 touch-manipulation"
+                  aria-expanded={activeAccordion === 'menu'}
+                >
+                  <span style={{textRendering: 'geometricPrecision'}}>
+                    Menu
+                  </span>
+                  <img
+                    src={activeAccordion === 'menu' ? Minus : Plus}
+                    alt={activeAccordion === 'menu' ? 'Collapse' : 'Expand'}
+                    className="w-4 h-4"
+                  />
+                </button>
+
+                {activeAccordion === 'menu' && (
+                  <div className="pb-4 space-y-3 animate-fadeIn">
+                    {data[1]?.links?.references.nodes.map((item) => {
+                      const url = item?.url?.value;
+                      const isExternal = url && !url.startsWith('/');
+
+                      return isExternal ? (
+                        <a
+                          key={`${item?.text?.value}_mobile`}
+                          href={url}
+                          className="moderat-bold block text-[#00d58d] text-opacity-80 text-base pl-4 py-3 hover:text-opacity-100 transition-opacity touch-manipulation"
+                          onClick={handleMenuLinkClick}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {item?.text?.value}
+                        </a>
+                      ) : (
+                        <Link
+                          key={`${item?.text?.value}_mobile`}
+                          to={url}
+                          className="moderat-bold block text-[#00d58d] text-opacity-80 text-base pl-4 py-3 hover:text-opacity-100 transition-opacity touch-manipulation"
+                          onClick={handleMenuLinkClick}
+                        >
+                          {item?.text?.value}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
               <Link
                 to="/contact-us"
                 className="block text-[#00d58d] moderat-bold text-lg py-6 mb-1 border-opacity-20 touch-manipulation"
