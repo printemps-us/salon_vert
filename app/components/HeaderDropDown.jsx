@@ -13,6 +13,13 @@ function HeaderDropDown({
   handleMouseEnter,
 }) {
   const megaRef = useRef(null);
+  function getIndex() {
+    if (isHover == 'about') {
+      return 0;
+    } else if (isHover == 'menu') {
+      return 1;
+    }
+  }
   useEffect(() => {
     gsap.killTweensOf(hoverRef.current, {height: true});
     if (isHover) {
@@ -38,7 +45,7 @@ function HeaderDropDown({
     <div
       className="absolute w-full top-[100px]"
       ref={dropdownRef}
-      onMouseEnter={handleMouseEnter}
+      onMouseEnter={() => handleMouseEnter(isHover)}
     >
       <div
         className="h-0 bg-black-op40 absolute w-full z-50"
@@ -51,12 +58,12 @@ function HeaderDropDown({
         onMouseLeave={handleMouseLeave}
       >
         <div className="flex flex-col gap-2 w-[180px] h-[230px] p-small-regular-desktop">
-          <p className="label-desktop">{headerData?.title?.value}</p>
-          {headerData?.links?.references.nodes.map((item) => {
+          <p className="label-desktop">
+            {headerData[getIndex()]?.title?.value}
+          </p>
+          {headerData[getIndex()]?.links?.references.nodes.map((item) => {
             const url = item?.url?.value;
-            const isExternal =
-              url &&
-              !url.startsWith('/')
+            const isExternal = url && !url.startsWith('/');
 
             return isExternal ? (
               <a
@@ -82,28 +89,30 @@ function HeaderDropDown({
           })}
         </div>
 
-        {headerData?.image_links?.references.nodes.map((item, index) => (
-          <Link
-            key={`${item?.header?.value}_header_image`}
-            className="flex flex-col items-center rounded-xl cursor-pointer"
-            to={item?.link?.value}
-            onClick={handleMouseLeave}
-          >
-            <div className="rounded-xl overflow-hidden">
-              <Image
-                className="h-[192px] object-cover"
-                data={item?.image?.reference.image}
-                sizes="(min-width: 5em) 15vw, 30vw"
-                aspectRatio="1/1"
-              ></Image>
-            </div>
-            <div className="py-2">
-              <p className="p-small-semi-bold-desktop uppercase">
-                {item?.header?.value}
-              </p>
-            </div>
-          </Link>
-        ))}
+        {headerData[getIndex()]?.image_links?.references.nodes.map(
+          (item, index) => (
+            <Link
+              key={`${item?.header?.value}_header_image`}
+              className="flex flex-col items-center rounded-xl cursor-pointer"
+              to={item?.link?.value}
+              onClick={handleMouseLeave}
+            >
+              <div className="rounded-xl overflow-hidden">
+                <Image
+                  className="h-[192px] object-cover"
+                  data={item?.image?.reference.image}
+                  sizes="(min-width: 5em) 15vw, 30vw"
+                  aspectRatio="1/1"
+                ></Image>
+              </div>
+              <div className="py-2">
+                <p className="p-small-semi-bold-desktop uppercase">
+                  {item?.header?.value}
+                </p>
+              </div>
+            </Link>
+          ),
+        )}
       </div>
     </div>
   );

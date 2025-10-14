@@ -5,8 +5,10 @@ import RestaurantModal from '../RestaurantModal';
 import RoomCard from '../RoomCard';
 import FooterMobile from './FooterMobile';
 import logo from '~/assets/SV_LOGO_031025.png';
+import MenuModal from '../MenuModal';
 function HomePageMobile({staticData}) {
   const [modalOpen, setModalOpen] = useState(false);
+  const [menuModalOpen, setMenuModalOpen] = useState(false);
 
   return (
     <div>
@@ -16,8 +18,13 @@ function HomePageMobile({staticData}) {
         venue_id={'87092'}
         link={'https://resy.com/cities/new-york-ny/venues/salon-vert'}
         api_key={'z4Ih9aYxtWx3obA8GxX8Rsa33g5mQzKZ'}
+        isMobile={true}
       />
-
+      <MenuModal
+        setOpenModal={setMenuModalOpen}
+        openModal={menuModalOpen}
+        isMobile={true}
+      ></MenuModal>
       {/* Hero Section */}
       <div className="bg-[#006f43] flex flex-col items-center gap-2 py-16 px-4">
         <Image
@@ -28,7 +35,7 @@ function HomePageMobile({staticData}) {
           alt="Salon Vert Logo"
         />
 
-        <div className='mt-6'>
+        <div className="mt-6">
           <p
             className="moderat-bold text-center text-sm"
             style={{color: '#00d58d'}}
@@ -62,7 +69,7 @@ function HomePageMobile({staticData}) {
             textColor={'black'}
             border="#00d58d"
             hoverBorder={'#00d58d'}
-            clickURL={'/menu'}
+            onClick={() => setMenuModalOpen(true)}
             h="48px"
             w="100%"
           />

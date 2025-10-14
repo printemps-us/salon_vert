@@ -15,6 +15,7 @@ import RoomCard from '~/components/RoomCard';
 import useIsMobile from '~/components/functions/isMobile';
 import HomePageMobile from '~/components/mobile/HomePageMobile';
 import SmoothScroll from '~/components/SmoothScroll';
+import MenuModal from '~/components/MenuModal';
 /**
  * @param {LoaderFunctionArgs} args
  */
@@ -30,6 +31,7 @@ export const meta = ({data}) => {
 
 export default function Homepage() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [menuModalOpen, setMenuModalOpen] = useState(false);
 
   /** @type {LoaderReturnData} */
   const {staticData, isMobile} = useLoaderData();
@@ -39,7 +41,6 @@ export default function Homepage() {
   if (isMobileActive) {
     return <HomePageMobile staticData={staticData} />;
   }
-  console.log(staticData);
   // Desktop version
   return (
     <SmoothScroll>
@@ -50,6 +51,11 @@ export default function Homepage() {
         link={'https://resy.com/cities/new-york-ny/venues/salon-vert'}
         api_key={'z4Ih9aYxtWx3obA8GxX8Rsa33g5mQzKZ'}
       ></RestaurantModal>
+      <MenuModal
+        setOpenModal={setMenuModalOpen}
+        openModal={menuModalOpen}
+      ></MenuModal>
+
       <div className="bg-[#006f43] flex flex-col items-center gap-2 py-[100px]">
         <Image
           className="logo"
@@ -58,7 +64,7 @@ export default function Homepage() {
           sizes="(min-width: 35em) 60vw, 70vw"
           alt="Salon Vert Logo"
         ></Image>
-        <div className='mt-4'>
+        <div className="mt-4">
           <p className="moderat-bold text-center" style={{color: '#00d58d'}}>
             HOURS
           </p>
@@ -86,7 +92,7 @@ export default function Homepage() {
             textColor={'#00d58d'}
             border="#00d58d"
             hoverBorder={'#00d58d'}
-            clickURL={'/menu'}
+            onClick={() => setMenuModalOpen(true)}
             h="42px"
             w="90%"
           />
@@ -147,7 +153,10 @@ export default function Homepage() {
       </div>
       <div className="flex gap-4 px-6 mb-10">
         {staticData.title_images.references.nodes.map((item, index) => (
-          <div key={index} className="overflow-hidden flex-1 rounded-xl h-[450px]">
+          <div
+            key={index}
+            className="overflow-hidden flex-1 rounded-xl h-[450px]"
+          >
             <Image data={item.image} className="w-full h-full object-cover">
               {/* your content here */}
             </Image>
