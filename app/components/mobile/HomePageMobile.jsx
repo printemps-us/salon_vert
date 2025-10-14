@@ -18,6 +18,7 @@ function HomePageMobile({staticData}) {
         venue_id={'87092'}
         link={'https://resy.com/cities/new-york-ny/venues/salon-vert'}
         api_key={'z4Ih9aYxtWx3obA8GxX8Rsa33g5mQzKZ'}
+        isMobile={true}
       />
       <MenuModal
         setOpenModal={setMenuModalOpen}
