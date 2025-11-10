@@ -18,7 +18,6 @@ import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
 import {HEADER_DATA_QUERY} from './components/query/headerQuery';
 import {checkIfMobile} from '~/components/functions/isMobile';
 
-
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
  * @type {ShouldRevalidateFunction}
@@ -207,6 +206,7 @@ export function Layout({children}) {
         <CustomScrollRestoration />
         <Script src="/bloomreach.js" />
         <Script src="/googleAnalytics.js" />
+        <Script src="/gtm.js" />
         <Script
           src="https://widgets.resy.com/embed.js"
           referrerPolicy="no-referrer"
