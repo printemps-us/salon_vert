@@ -21,6 +21,7 @@ export function PageLayout({
   header,
   pathname,
   isLoggedIn,
+  popupData,
   publicStoreDomain,
 }) {
   // Get the root data which includes isMobile
@@ -44,6 +45,7 @@ export function PageLayout({
         data={header.metaobjects.nodes}
         isMobile={isMobile}
         pathname={pathname}
+        popupData={popupData}
       ></HeaderComponent>
       <main>{children}</main>
       {/* <Footer
