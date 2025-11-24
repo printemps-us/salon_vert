@@ -76,7 +76,11 @@ function Popup({data, onClose, isMobile}) {
           )}
           <div className="flex-1 flex flex-col justify-between p-6">
             <div className="pb-6">
-              <h2 className="h3-desktop uppercase text-start">
+              <h2
+                className={`${
+                  isMobile ? 'h3-mobile' : 'h3-desktop'
+                } uppercase text-start`}
+              >
                 {data.title.value}
               </h2>
               <p className="text-start">{data.content.value}</p>
