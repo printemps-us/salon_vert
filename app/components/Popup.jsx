@@ -83,7 +83,7 @@ function Popup({data, onClose, isMobile}) {
               >
                 {data.title.value}
               </h2>
-              <p className="text-start">{data.content.value}</p>
+              <p className="text-start p-small-regular-desktop">{data.content.value}</p>
             </div>
             <AnimatedButton
               text={data.button.reference?.button_text.value}
