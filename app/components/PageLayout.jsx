@@ -27,7 +27,7 @@ export function PageLayout({
   // Get the root data which includes isMobile
   const rootData = useRouteLoaderData('root');
   const isMobile = rootData?.isMobile;
-  console.log(header)
+  console.log(header);
   return (
     <Aside.Provider>
       {/* <CartAside cart={cart} />
@@ -45,7 +45,7 @@ export function PageLayout({
         data={header.metaobjects.nodes}
         isMobile={isMobile}
         pathname={pathname}
-        popupData={popupData}
+        popupData={popupData.metaobjects.nodes[0]}
       ></HeaderComponent>
       <main>{children}</main>
       {/* <Footer
